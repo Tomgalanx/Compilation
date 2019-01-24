@@ -1,5 +1,7 @@
 package yal.arbre;
 
+import yal.exceptions.NonDeclareException;
+
 import java.util.ArrayList;
 
 /**
@@ -22,6 +24,9 @@ public class BlocDInstructions extends ArbreAbstrait {
                                       "    li $v0, 10            # retour au système\n" +
                                       "    syscall\n" ;
 
+    protected static String variable = " # initialiser s7 avec sp (initialisation de la base des variables)\n" +
+            "    move $s7,$sp \n";
+
     public BlocDInstructions(int n) {
         super(n) ;
         programme = new ArrayList<>() ;
@@ -37,7 +42,7 @@ public class BlocDInstructions extends ArbreAbstrait {
     }
 
     @Override
-    public void verifier() {
+    public void verifier() throws NonDeclareException {
         for (ArbreAbstrait a : programme) {
             a.verifier() ;
         }
@@ -48,6 +53,7 @@ public class BlocDInstructions extends ArbreAbstrait {
         StringBuilder sb = new StringBuilder("") ;
         sb.append(zoneData) ;
         sb.append(debutCode) ;
+        sb.append(variable);
         for (ArbreAbstrait a : programme) {
             sb.append(a.toMIPS()) ;
         }

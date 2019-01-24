@@ -39,15 +39,22 @@ guillemet = [\"]
 finDeLigne = \r|\n
 espace = {finDeLigne}  | [ \t\f]
 
+commentaireSlashSlash = [/][/].*
+
 %%
 
 "programme"            { return symbol(CodesLexicaux.PROGRAMME); }
 "debut"                { return symbol(CodesLexicaux.DEBUT); }
 "fin"              	   { return symbol(CodesLexicaux.FIN); }
+"entier"                { return symbol(CodesLexicaux.ENTIER);}
 
 "ecrire"               { return symbol(CodesLexicaux.ECRIRE); }
 
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
+
+{commentaireSlashSlash} { }
+
+{"+"|"-"|"/"|"*"}       { return symbol(CodesLexicaux.OPER);}
 
 {csteE}      	       { return symbol(CodesLexicaux.CSTENTIERE, yytext()); }
 
