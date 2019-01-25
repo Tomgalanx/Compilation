@@ -1,4 +1,4 @@
-package yal.arbre.Variables;
+package Compilation.yal.arbre.Variables;
 
 public abstract class Symbole {
 
@@ -9,7 +9,9 @@ public abstract class Symbole {
         dep= deplacement;
     }
 
-    public abstract int deplacement();
+    public int deplacement() {
+        return dep;
+    }
 
 
 }

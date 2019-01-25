@@ -1,7 +1,20 @@
-package yal.analyse ;
+package Compilation.yal.analyse ;
 
+
+import Compilation.*;
+import java.util.*;
 import java_cup.runtime.*;
-import yal.exceptions.AnalyseLexicaleException;
+import Compilation.yal.exceptions.*;
+import Compilation.yal.arbre.ArbreAbstrait;
+import Compilation.yal.arbre.BlocDInstructions;
+import Compilation.yal.arbre.expressions.ConstanteEntiere;
+import Compilation.yal.arbre.expressions.Expression;
+import Compilation.yal.arbre.instructions.Affectation;
+import Compilation.yal.arbre.instructions.Declaration;
+import Compilation.yal.arbre.instructions.Ecrire;
+import Compilation.yal.arbre.expressions.IDF;
+import Compilation.yal.arbre.instructions.Lire;
+import Compilation.yal.exceptions.AnalyseSyntaxiqueException;
       
 %%
    
@@ -49,12 +62,18 @@ commentaireSlashSlash = [/][/].*
 "entier"                { return symbol(CodesLexicaux.ENTIER);}
 
 "ecrire"               { return symbol(CodesLexicaux.ECRIRE); }
+"lire"               { return symbol(CodesLexicaux.LIRE); }
 
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
 
+"="                     {   return symbol(CodesLexicaux.EGALE);}
+
 {commentaireSlashSlash} { }
 
-{"+"|"-"|"/"|"*"}       { return symbol(CodesLexicaux.OPER);}
+
+
+
+
 
 {csteE}      	       { return symbol(CodesLexicaux.CSTENTIERE, yytext()); }
 

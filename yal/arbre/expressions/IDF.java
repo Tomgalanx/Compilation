@@ -1,9 +1,9 @@
-package yal.arbre.expressions;
+package Compilation.yal.arbre.expressions;
 
-import yal.arbre.TDS;
-import yal.arbre.Variables.EntreeVariable;
-import yal.arbre.Variables.Symbole;
-import yal.exceptions.NonDeclareException;
+import Compilation.yal.arbre.TDS;
+import Compilation.yal.arbre.Variables.EntreeVariable;
+import Compilation.yal.arbre.Variables.Symbole;
+import Compilation.yal.exceptions.NonDeclareException;
 
 public class IDF extends Expression{
 
@@ -26,10 +26,21 @@ public class IDF extends Expression{
 
         dep = s.deplacement();
 
+
+    }
+
+
+    public int getDep() {
+        return dep;
     }
 
     @Override
     public String toMIPS() {
-        return null;
+
+        String res ="#Load word \n" +
+                "lw $v0,"+dep+"($s7) \n";
+
+
+        return res;
     }
 }

@@ -1,13 +1,14 @@
-package yal;
+package Compilation.yal;
+
+import Compilation.yal.analyse.AnalyseurLexical;
+import Compilation.yal.analyse.AnalyseurSyntaxique;
+import Compilation.yal.arbre.ArbreAbstrait;
+import Compilation.yal.exceptions.AnalyseException;
 
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import yal.analyse.AnalyseurLexical;
-import yal.analyse.AnalyseurSyntaxique;
-import yal.arbre.ArbreAbstrait;
-import yal.exceptions.AnalyseException;
 
 public class Yal {
     
@@ -31,7 +32,7 @@ public class Yal {
             System.err.println(ex.getMessage());
         }
         catch (Exception ex) {
-            Logger.getLogger(yal.Yal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Compilation.yal.Yal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -41,7 +42,7 @@ public class Yal {
             System.err.println("\tjava -jar yal.jar <fichierSource.yal>") ;
             System.exit(1) ;
         }
-        new yal.Yal(args[0]) ;
+        new Compilation.yal.Yal(args[0]) ;
     }
     
 }

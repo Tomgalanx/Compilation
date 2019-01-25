@@ -1,6 +1,7 @@
-package yal.arbre;
+package Compilation.yal.arbre;
 
-import yal.exceptions.NonDeclareException;
+
+import Compilation.yal.exceptions.NonDeclareException;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,8 @@ public class BlocDInstructions extends ArbreAbstrait {
     protected static String debutCode = ".text\n" +
                                         "main :\n" ;
     protected static String finCode = "end :\n" +
-                                      "    li $v0, 10            # retour au système\n" +
+                                      "    li $v0, 10" +
+            "                         # retour au système\n" +
                                       "    syscall\n" ;
 
     protected static String variable = " # initialiser s7 avec sp (initialisation de la base des variables)\n" +

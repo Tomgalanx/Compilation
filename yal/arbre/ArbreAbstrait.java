@@ -1,6 +1,6 @@
-package yal.arbre;
+package Compilation.yal.arbre;
 
-import yal.exceptions.NonDeclareException;
+import Compilation.yal.exceptions.NonDeclareException;
 
 public abstract class ArbreAbstrait {
     
@@ -15,7 +15,7 @@ public abstract class ArbreAbstrait {
             return noLigne ;
     }
 
-    public abstract void verifier() throws NonDeclareException;
+    public abstract void verifier() throws NonDeclareException, NonDeclareException;
     public abstract String toMIPS();
 
 }

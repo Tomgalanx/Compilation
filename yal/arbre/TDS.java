@@ -1,17 +1,18 @@
-package yal.arbre;
+package Compilation.yal.arbre;
 
-import yal.arbre.Variables.Entree;
-import yal.arbre.Variables.Symbole;
-import yal.arbre.Variables.SymboleVariable;
-import yal.exceptions.DoubleDeclarationExcepion;
-import yal.exceptions.NonDeclareException;
+
+import Compilation.yal.arbre.Variables.Entree;
+import Compilation.yal.arbre.Variables.Symbole;
+import Compilation.yal.arbre.Variables.SymboleVariable;
+import Compilation.yal.exceptions.DoubleDeclarationExcepion;
+import Compilation.yal.exceptions.NonDeclareException;
 
 import java.util.HashMap;
 
 public class TDS {
 
     // Collection
-    private HashMap<Entree,Symbole> tds;
+    private HashMap<Entree, Symbole> tds;
 
     // Instance pour le patron singleton
     private static TDS instance = new TDS();
@@ -54,7 +55,7 @@ public class TDS {
     // Retourn la taille de la pile pour les variables
     public int getZoneVariable(){
 
-        int res=0;
+        int res=4;
 
         for(Symbole s : tds.values()){
 

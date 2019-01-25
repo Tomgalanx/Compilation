@@ -1,9 +1,12 @@
-package yal.arbre.Variables;
+package Compilation.yal.arbre.Variables;
 
 public class EntreeVariable extends Entree{
 
 
     public EntreeVariable(String nom) {
-        super();
+        super(nom);
     }
+
+
+
 }

@@ -1,6 +1,6 @@
-package yal.arbre.expressions;
+package Compilation.yal.arbre.expressions;
 
-import yal.arbre.ArbreAbstrait;
+import Compilation.yal.arbre.ArbreAbstrait;
 
 public abstract class Expression extends ArbreAbstrait {
     

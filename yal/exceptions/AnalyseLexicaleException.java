@@ -1,4 +1,4 @@
-package yal.exceptions;
+package Compilation.yal.exceptions;
 
 public class AnalyseLexicaleException extends AnalyseException {
  

@@ -1,7 +1,8 @@
-package yal.arbre.instructions;
+package Compilation.yal.arbre.instructions;
 
-import yal.arbre.ArbreAbstrait;
-import yal.arbre.TDS;
+
+import Compilation.yal.arbre.ArbreAbstrait;
+import Compilation.yal.arbre.TDS;
 
 public abstract class Instruction extends ArbreAbstrait {
 

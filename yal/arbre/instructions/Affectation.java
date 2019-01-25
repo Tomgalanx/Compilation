@@ -1,16 +1,20 @@
-package yal.arbre.instructions;
+package Compilation.yal.arbre.instructions;
 
-import yal.arbre.expressions.Expression;
-import yal.arbre.expressions.IDF;
-import yal.exceptions.NonDeclareException;
+import Compilation.yal.arbre.TDS;
+import Compilation.yal.arbre.expressions.Expression;
+import Compilation.yal.arbre.expressions.IDF;
+import Compilation.yal.exceptions.NonDeclareException;
 
 public class Affectation extends Instruction{
 
     private IDF idf;
     private Expression exp;
 
-    public Affectation(int n,String nom) {
+    public Affectation(int n,String nom,Expression exp) {
         super(n);
+
+        idf = new IDF(n,nom);
+        this.exp = exp;
     }
 
 
@@ -27,6 +31,13 @@ public class Affectation extends Instruction{
 
     @Override
     public String toMIPS() {
-        return null;
+
+
+        String res ="# Affectation \n"+
+                idf.toMIPS() + exp.toMIPS()+"" +
+                "sw $v0,"+idf.getDep()+"($s7)\n";
+
+
+        return res;
     }
 }

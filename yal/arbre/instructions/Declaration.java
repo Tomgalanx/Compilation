@@ -1,9 +1,11 @@
-package yal.arbre.instructions;
+package Compilation.yal.arbre.instructions;
 
-import yal.arbre.Variables.EntreeVariable;
-import yal.arbre.Variables.SymboleVariable;
-import yal.exceptions.DoubleDeclarationExcepion;
-import yal.exceptions.NonDeclareException;
+
+import Compilation.yal.arbre.Variables.EntreeVariable;
+import Compilation.yal.arbre.Variables.SymboleVariable;
+import Compilation.yal.exceptions.DoubleDeclarationExcepion;
+
+import java.util.Objects;
 
 public class Declaration extends Instruction{
 
@@ -20,12 +22,11 @@ public class Declaration extends Instruction{
 
         symbole = new SymboleVariable(dep-4);
 
-
         tds.ajouter(entree, symbole);
     }
 
     @Override
-    public void verifier() throws NonDeclareException {
+    public void verifier() {
 
     }
 
@@ -38,5 +39,19 @@ public class Declaration extends Instruction{
                 "# réservation de l'espace pour la variables\n" +
                 "    addi $s7, $s7,"+ symbole.deplacement()+"\n";
         return res;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Declaration that = (Declaration) o;
+        return Objects.equals(entree, that.entree) &&
+                Objects.equals(symbole, that.symbole);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(entree, symbole);
     }
 }

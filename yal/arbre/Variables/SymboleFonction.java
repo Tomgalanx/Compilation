@@ -1,4 +1,4 @@
-package yal.arbre.Variables;
+package Compilation.yal.arbre.Variables;
 
 public class SymboleFonction extends Symbole{
 
@@ -7,8 +7,4 @@ public class SymboleFonction extends Symbole{
         super(deplacement);
     }
 
-    @Override
-    public int deplacement() {
-        return 0;
-    }
 }

@@ -1,6 +1,7 @@
-package yal.arbre.instructions;
+package Compilation.yal.arbre.instructions;
 
-import yal.arbre.expressions.Expression;
+import Compilation.yal.arbre.expressions.Expression;
+import Compilation.yal.exceptions.NonDeclareException;
 
 public class Ecrire extends Instruction {
 
@@ -12,17 +13,20 @@ public class Ecrire extends Instruction {
     }
 
     @Override
-    public void verifier() {
+    public void verifier() throws NonDeclareException {
+
+        exp.verifier();
     }
 
     @Override
     public String toMIPS() {
-        return  "                   # affichage de l'expression\n" +
+
+        return  "# affichage de l'expression\n" +
                 exp.toMIPS() +
                 "    move $a0, $v0\n" +
                 "    li $v0, 1\n" +
                 "    syscall\n" +
-                "    li $v0, 4      # retour à la ligne\n" +
+                "    li $v0, 4  \n " +
                 "    la $a0, finLigne\n" +
                 "    syscall\n" ;
     }

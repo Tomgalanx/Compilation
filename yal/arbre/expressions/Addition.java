@@ -1,6 +1,7 @@
-package yal.arbre.expressions;
+package Compilation.yal.arbre.expressions;
 
-import yal.exceptions.NonDeclareException;
+
+import Compilation.yal.exceptions.NonDeclareException;
 
 public class Addition extends ExpressionBinaire {
 
