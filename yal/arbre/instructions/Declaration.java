@@ -37,7 +37,7 @@ public class Declaration extends Instruction{
 
         String res = "" +
                 "# réservation de l'espace pour la variables\n" +
-                "    addi $s7, $s7,"+ symbole.deplacement()+"\n";
+                "    addi $sp, $sp,"+ symbole.deplacement()+"\n";
         return res;
     }
 
