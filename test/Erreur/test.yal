@@ -1,0 +1,26 @@
+programme test debut
+
+
+
+    // Ceci est un commentaire
+
+    entier a;
+
+    a = 10;
+
+    ecrire a;
+
+    entier b;
+
+   b=27;
+
+
+    ecrire b;
+
+
+
+
+
+
+
+fin
