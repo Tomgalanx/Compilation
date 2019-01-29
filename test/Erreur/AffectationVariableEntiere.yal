@@ -1,0 +1,29 @@
+programme AffectationVariableEntiere debut
+
+
+
+    // Ceci est un commentaire
+
+    entier b;
+    entier c;
+    entier d;
+    entier e;
+    entier f;
+
+    a = 1;
+    b = a;
+    c = b;
+    d = c;
+    e = d;
+    f = e;
+
+    ecrire a;
+    ecrire b;
+    ecrire c;
+    ecrire d;
+    ecrire e;
+    ecrire f;
+
+
+
+fin

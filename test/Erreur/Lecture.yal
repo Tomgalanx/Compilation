@@ -1,0 +1,9 @@
+programme Lecture debut
+
+    // Ceci est un commentaire
+
+    lire a;
+
+    ecrire a;
+
+fin
