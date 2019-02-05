@@ -32,7 +32,7 @@ public class TDS {
             return tds.get(e);
         // Si il n'existe pas, on retourne une exception
         else
-            throw new NonDeclareException();
+            throw new NonDeclareException(e.getLigne());
     }
 
 
@@ -41,7 +41,7 @@ public class TDS {
 
         // Si le nom existe deja dans notre collection, on retourne une exception de double declaration
         if(tds.containsKey(e)){
-            throw new DoubleDeclarationExcepion();
+            throw new DoubleDeclarationExcepion(e.getLigne());
         }
 
         // Sinon on l'ajoute

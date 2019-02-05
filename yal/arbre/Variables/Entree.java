@@ -6,11 +6,13 @@ public abstract class Entree {
 
 
     private String nom;
+    private int ligne;
 
 
-    public Entree(String nom){
+    public Entree(String nom,int ligne){
 
         this.nom = nom;
+        this.ligne = ligne;
     }
 
     @Override
@@ -24,5 +26,10 @@ public abstract class Entree {
     @Override
     public int hashCode() {
         return Objects.hash(nom);
+    }
+
+    public int getLigne() {
+
+        return ligne;
     }
 }

@@ -1,10 +1,10 @@
 package Compilation.yal.exceptions;
 
-public class NonDeclareException extends Exception {
+public class NonDeclareException extends AnalyseSemantiqueException {
 
 
 
-    public NonDeclareException(){
-        super("Variable non déclaré");
+    public NonDeclareException(int ligne) {
+        super(ligne,"Variable non déclaré");
     }
 }

@@ -10,19 +10,20 @@ public class IDF extends Expression{
     private String nom;
     private int dep;
 
+    private int ligne;
     // Constructeur de l'identifiant :
     // n : Numro de ligne
     // nom : nom de l'identifiant
     public IDF(int n,String nom) {
         super(n);
-
+        this.ligne = n;
         this.nom = nom;
     }
 
     @Override
     public void verifier() throws NonDeclareException {
 
-        Symbole s = TDS.getInstance().identification(new EntreeVariable(nom));
+        Symbole s = TDS.getInstance().identification(new EntreeVariable(nom,ligne));
 
         dep = s.deplacement();
 

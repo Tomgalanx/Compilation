@@ -1,9 +1,9 @@
 package Compilation.yal.exceptions;
 
-public class DoubleDeclarationExcepion extends Exception {
+public class DoubleDeclarationExcepion extends AnalyseSemantiqueException {
 
 
-    public DoubleDeclarationExcepion(){
-        super("La variable a été déclaré plusieurs fois");
+    public DoubleDeclarationExcepion(int n){
+        super(n,"La variable à déja été déclaré");
     }
 }
