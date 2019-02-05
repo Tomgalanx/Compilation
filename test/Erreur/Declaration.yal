@@ -5,10 +5,6 @@ programme Declaration debut
     // Ceci est un commentaire
 
     entier a;
-    entier b;
-    entier c;
-    entier d;
-    entier e;
-    entier f;
+    entier a;
 
 fin

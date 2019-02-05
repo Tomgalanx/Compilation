@@ -1,7 +1,9 @@
-programme AffectationEntier debut
+programme AffectationVariableEntiere debut
+
+
+
     // Ceci est un commentaire
 
-    entier a;
     entier b;
     entier c;
     entier d;
@@ -9,21 +11,19 @@ programme AffectationEntier debut
     entier f;
 
     a = 1;
+    b = a;
+    c = b;
+    d = c;
+    e = d;
+    f = e;
+
     ecrire a;
-
-    b = 10;
     ecrire b;
-
-    c = 100;
     ecrire c;
-
-    d = 1000;
     ecrire d;
-
-    e = 10000;
     ecrire e;
-
-    f = 100000;
     ecrire f;
+
+
 
 fin
