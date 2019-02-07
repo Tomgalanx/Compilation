@@ -1,6 +1,7 @@
 package Compilation.yal.analyse ;
 
 import java.util.*;
+import Compilation.yal.arbre.expressions.*;
 import Compilation.yal.arbre.ArbreAbstrait;
 import Compilation.yal.arbre.BlocDInstructions;
 import Compilation.yal.arbre.expressions.ConstanteEntiere;
@@ -11,6 +12,7 @@ import Compilation.yal.arbre.instructions.Declaration;
 import Compilation.yal.arbre.instructions.Ecrire;
 import Compilation.yal.arbre.instructions.Lire;
 import Compilation.yal.exceptions.AnalyseSyntaxiqueException;
+import Compilation.yal.arbre.expressions.Addition;
 
 import java_cup.runtime.*;
 
@@ -62,13 +64,16 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE,ENTIER,EGALE,LIRE ;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE,ENTIER,EGALE,LIRE,MULT,DIV,MOINS,PLUS ;
 terminal String    IDF, CSTENTIERE ;
    
 /* Non terminals used in the grammar section.  */
 
-non terminal ArbreAbstrait PROG, LINST, INST,DECL_VAR,AFFECT;
+non terminal ArbreAbstrait PROG, LINST, INST,DECL_VAR,AFFECT,OPER;
 non terminal Expression EXP ;
+
+precedence left PLUS,MOINS;
+precedence left MULT,DIV;
 
 /* ----------------------------Grammar Section-------------------- */
  
@@ -107,6 +112,21 @@ EXP    ::=     CSTENTIERE:c
 
                 | IDF :i
                 {: RESULT = new IDF(ileft, i); :}
+
+                | EXP:e1 PLUS EXP:e2
+                {: RESULT = new Addition(e1left,e1,e2); :}
+
+                |  EXP:e1 MOINS EXP:e2
+                {: RESULT = new Soustraction(e1left,e1,e2); :}
+
+                |  EXP:e1 DIV EXP:e2
+                {: RESULT = new Division(e1left,e1,e2); :}
+
+                |  EXP:e1 MULT EXP:e2
+                {: RESULT = new Multiplication(e1left,e1,e2); :}
+
+                |  MOINS EXP:c
+                {: RESULT = new ConstanteEntiere("-"+c, cleft + 1); :}
                ;
 
 
@@ -119,4 +139,6 @@ DECL_VAR    ::= ENTIER IDF:i
 AFFECT      ::= IDF:i EGALE EXP:e
             {: RESULT = new Affectation(ileft,i,e); :}
             ;
+
+OPER        ::= PLUS | MOINS | MULT | DIV ;
 

@@ -3,9 +3,9 @@ package Compilation.yal.arbre.expressions;
 
 import Compilation.yal.exceptions.NonDeclareException;
 
-public class Addition extends ExpressionArithmetique {
+public class Soustraction extends ExpressionArithmetique {
 
-    public Addition(int n, Expression gauche, Expression droite) {
+    public Soustraction(int n, Expression gauche, Expression droite) {
         super(n, gauche, droite);
     }
 
@@ -13,13 +13,12 @@ public class Addition extends ExpressionArithmetique {
     public void verifier() throws NonDeclareException {
         gauche.verifier();
         droite.verifier();
-
     }
 
     @Override
     public String toMIPS() {
 
-        StringBuilder res =new StringBuilder("# Addition \n");
+        StringBuilder res =new StringBuilder("# Soustraction \n");
 
         res.append(gauche.toMIPS());
 
@@ -29,7 +28,7 @@ public class Addition extends ExpressionArithmetique {
 
         res.append("move $t8,$sp \n");
 
-        res.append("add $v0,$v0,$t8 \n");
+        res.append("sub $v0,$t8,$v0 \n");
 
         return res.toString();
     }

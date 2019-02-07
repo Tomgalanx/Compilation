@@ -71,6 +71,12 @@ commentaireSlashSlash = [/][/].*
 {commentaireSlashSlash} { }
 
 
+"+"                     { return symbol(CodesLexicaux.PLUS);}
+"-"                     { return symbol(CodesLexicaux.MOINS);}
+"/"                     { return symbol(CodesLexicaux.DIV);}
+"*"                     { return symbol(CodesLexicaux.MULT);}
+
+
 
 
 

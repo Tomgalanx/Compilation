@@ -8,8 +8,8 @@ public class ConstanteEntiere extends Constante {
 
     @Override
     public String toMIPS() {
-        StringBuilder sb = new StringBuilder("") ;
-        sb.append("    li $v0, ") ;
+        StringBuilder sb = new StringBuilder("# Chargement de la constante \n") ;
+        sb.append("li $v0, ") ;
         sb.append(cste) ;
         sb.append("\n") ;
         return sb.toString() ;
