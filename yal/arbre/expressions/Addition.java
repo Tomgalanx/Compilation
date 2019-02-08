@@ -23,11 +23,15 @@ public class Addition extends ExpressionArithmetique {
 
         res.append(gauche.toMIPS());
 
-        res.append("move $sp,$v0 \n");
+        res.append("sw $v0,($sp) \n");
+
+        res.append("add $sp,$sp,-4 \n");
 
         res.append(droite.toMIPS());
 
-        res.append("move $t8,$sp \n");
+        res.append("add $sp,$sp,4 \n");
+
+        res.append("lw $t8,($sp) \n");
 
         res.append("add $v0,$v0,$t8 \n");
 

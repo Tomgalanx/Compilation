@@ -70,6 +70,9 @@ commentaireSlashSlash = [/][/].*
 
 {commentaireSlashSlash} { }
 
+"("                     {   return symbol(CodesLexicaux.PAROUV);}
+")"                     {   return symbol(CodesLexicaux.PARFER);}
+
 
 "+"                     { return symbol(CodesLexicaux.PLUS);}
 "-"                     { return symbol(CodesLexicaux.MOINS);}

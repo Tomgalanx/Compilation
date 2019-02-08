@@ -64,7 +64,7 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE,ENTIER,EGALE,LIRE,MULT,DIV,MOINS,PLUS ;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE,ENTIER,EGALE,LIRE,MULT,DIV,MOINS,PLUS,PAROUV,PARFER ;
 terminal String    IDF, CSTENTIERE ;
    
 /* Non terminals used in the grammar section.  */
@@ -72,8 +72,8 @@ terminal String    IDF, CSTENTIERE ;
 non terminal ArbreAbstrait PROG, LINST, INST,DECL_VAR,AFFECT,OPER;
 non terminal Expression EXP ;
 
-precedence left PLUS,MOINS;
-precedence left MULT,DIV;
+precedence right PLUS,MOINS;
+precedence right MULT,DIV;
 
 /* ----------------------------Grammar Section-------------------- */
  
@@ -127,6 +127,9 @@ EXP    ::=     CSTENTIERE:c
 
                 |  MOINS EXP:c
                 {: RESULT = new ConstanteEntiere("-"+c, cleft + 1); :}
+
+                | PAROUV EXP:e PARFER
+                {: RESULT = e ;:}
                ;
 
 
@@ -139,6 +142,4 @@ DECL_VAR    ::= ENTIER IDF:i
 AFFECT      ::= IDF:i EGALE EXP:e
             {: RESULT = new Affectation(ileft,i,e); :}
             ;
-
-OPER        ::= PLUS | MOINS | MULT | DIV ;
 
