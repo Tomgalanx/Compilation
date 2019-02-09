@@ -6,20 +6,21 @@
 package Compilation.yal.analyse;
 
 import java.util.*;
-import Compilation.yal.arbre.expressions.*;
+
 import Compilation.yal.arbre.ArbreAbstrait;
 import Compilation.yal.arbre.BlocDInstructions;
 import Compilation.yal.arbre.expressions.ConstanteEntiere;
 import Compilation.yal.arbre.expressions.Expression;
+import Compilation.yal.arbre.expressions.ExpressionBinaire.Arithmetique.Division;
+import Compilation.yal.arbre.expressions.ExpressionBinaire.Arithmetique.Multiplication;
+import Compilation.yal.arbre.expressions.ExpressionBinaire.Arithmetique.Soustraction;
 import Compilation.yal.arbre.expressions.IDF;
 import Compilation.yal.arbre.instructions.Affectation;
 import Compilation.yal.arbre.instructions.Declaration;
 import Compilation.yal.arbre.instructions.Ecrire;
 import Compilation.yal.arbre.instructions.Lire;
 import Compilation.yal.exceptions.AnalyseSyntaxiqueException;
-import Compilation.yal.arbre.expressions.Addition;
-import java_cup.runtime.*;
-import java_cup.runtime.XMLElement;
+import Compilation.yal.arbre.expressions.ExpressionBinaire.Arithmetique.Addition;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
   */
@@ -373,7 +374,7 @@ class CUP$AnalyseurSyntaxique$actions {
 		int e2left = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
 		int e2right = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).right;
 		Expression e2 = (Expression)((java_cup.runtime.Symbol) CUP$AnalyseurSyntaxique$stack.peek()).value;
-		 RESULT = new Soustraction(e1left,e1,e2); 
+		 RESULT = new Soustraction(e1left,e1,e2);
               CUP$AnalyseurSyntaxique$result = parser.getSymbolFactory().newSymbol("EXP",6, ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-2)), ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()), RESULT);
             }
           return CUP$AnalyseurSyntaxique$result;
@@ -388,7 +389,7 @@ class CUP$AnalyseurSyntaxique$actions {
 		int e2left = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
 		int e2right = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).right;
 		Expression e2 = (Expression)((java_cup.runtime.Symbol) CUP$AnalyseurSyntaxique$stack.peek()).value;
-		 RESULT = new Division(e1left,e1,e2); 
+		 RESULT = new Division(e1left,e1,e2);
               CUP$AnalyseurSyntaxique$result = parser.getSymbolFactory().newSymbol("EXP",6, ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-2)), ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()), RESULT);
             }
           return CUP$AnalyseurSyntaxique$result;
@@ -403,7 +404,7 @@ class CUP$AnalyseurSyntaxique$actions {
 		int e2left = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
 		int e2right = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).right;
 		Expression e2 = (Expression)((java_cup.runtime.Symbol) CUP$AnalyseurSyntaxique$stack.peek()).value;
-		 RESULT = new Multiplication(e1left,e1,e2); 
+		 RESULT = new Multiplication(e1left,e1,e2);
               CUP$AnalyseurSyntaxique$result = parser.getSymbolFactory().newSymbol("EXP",6, ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-2)), ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()), RESULT);
             }
           return CUP$AnalyseurSyntaxique$result;

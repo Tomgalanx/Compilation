@@ -1,9 +1,10 @@
-package Compilation.yal.arbre.expressions;
+package Compilation.yal.arbre.expressions.ExpressionBinaire.Arithmetique;
 
 
+import Compilation.yal.arbre.expressions.Expression;
 import Compilation.yal.exceptions.NonDeclareException;
 
-public class Multiplication extends ExpressionArithmetique {
+public class Multiplication extends ExpressionBinaire {
 
     public Multiplication(int n, Expression gauche, Expression droite) {
         super(n, gauche, droite);

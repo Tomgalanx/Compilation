@@ -1,9 +1,10 @@
-package Compilation.yal.arbre.expressions;
+package Compilation.yal.arbre.expressions.ExpressionBinaire.Arithmetique;
 
 
+import Compilation.yal.arbre.expressions.Expression;
 import Compilation.yal.exceptions.NonDeclareException;
 
-public class Addition extends ExpressionArithmetique {
+public class Addition extends ExpressionBinaire {
 
     public Addition(int n, Expression gauche, Expression droite) {
         super(n, gauche, droite);
@@ -21,17 +22,7 @@ public class Addition extends ExpressionArithmetique {
 
         StringBuilder res =new StringBuilder("# Addition \n");
 
-        res.append(gauche.toMIPS());
-
-        res.append("sw $v0,($sp) \n");
-
-        res.append("add $sp,$sp,-4 \n");
-
-        res.append(droite.toMIPS());
-
-        res.append("add $sp,$sp,4 \n");
-
-        res.append("lw $t8,($sp) \n");
+        res.append(super.toMIPS());
 
         res.append("add $v0,$v0,$t8 \n");
 

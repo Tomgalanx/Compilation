@@ -12,7 +12,7 @@ import Compilation.yal.arbre.instructions.Declaration;
 import Compilation.yal.arbre.instructions.Ecrire;
 import Compilation.yal.arbre.instructions.Lire;
 import Compilation.yal.exceptions.AnalyseSyntaxiqueException;
-import Compilation.yal.arbre.expressions.Addition;
+import Compilation.yal.arbre.expressions.ExpressionBinaire.Arithmetique.Addition;
 
 import java_cup.runtime.*;
 
