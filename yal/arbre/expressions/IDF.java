@@ -44,4 +44,9 @@ public class IDF extends Expression{
 
         return res;
     }
+
+    @Override
+    public String getType() {
+        return Expression.ARITHMETIQUE;
+    }
 }

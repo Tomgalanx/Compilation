@@ -34,4 +34,9 @@ public class Division extends ExpressionBinaire {
 
         return res.toString();
     }
+
+    @Override
+    public String getType() {
+        return "arithmetique";
+    }
 }

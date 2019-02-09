@@ -28,4 +28,9 @@ public class Soustraction extends ExpressionBinaire {
 
         return res.toString();
     }
+
+    @Override
+    public String getType() {
+        return "arithmetique";
+    }
 }

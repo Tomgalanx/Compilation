@@ -44,4 +44,9 @@ public class Multiplication extends ExpressionBinaire {
 
         return res.toString();
     }
+
+    @Override
+    public String getType() {
+        return "arithmetique";
+    }
 }

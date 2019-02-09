@@ -27,4 +27,9 @@ public class Inferieur extends ExpressionBinaire {
 
         return res.toString();
     }
+
+    @Override
+    public String getType() {
+        return "boolean";
+    }
 }

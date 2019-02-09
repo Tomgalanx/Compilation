@@ -2,6 +2,7 @@ package Compilation.yal.arbre.instructions;
 
 import Compilation.yal.arbre.BlocDInstructions;
 import Compilation.yal.arbre.expressions.Expression;
+import Compilation.yal.exceptions.AnalyseSemantiqueException;
 import Compilation.yal.exceptions.NonDeclareException;
 
 import java.util.UUID;
@@ -19,7 +20,13 @@ public class Boucle extends Instruction{
 
     @Override
     public void verifier() throws NonDeclareException {
+
         exp.verifier();
+
+        if(!exp.getType().equals(Expression.BOOLEEN)){
+            throw new AnalyseSemantiqueException(exp.getNoLigne(),"Dans une boucle, l'expression doit être un booleen");
+        }
+
         inst.verifier();
     }
 

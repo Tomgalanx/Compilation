@@ -68,14 +68,14 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE,ENTIER,EGALE,LIRE,MULT,DIV,MOINS,PLUS,ET,OU,DIFFERENT,TANTQUE,REPETER,FINTANTQUE,DOUBLEEGALE,NON,INFERIEUR,SUPERIEUR,PAROUV,PARFER ;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE,ENTIER,EGALE,LIRE,MULT,DIV,MOINS,PLUS,ET,OU,DIFFERENT,TANTQUE,REPETER,FINTANTQUE,DOUBLEEGALE,NON,INFERIEUR,SUPERIEUR,PAROUV,PARFER,ALORS,FINSI,SI,SINON;
 terminal String    IDF, CSTENTIERE ;
    
 /* Non terminals used in the grammar section.  */
 
-non terminal ArbreAbstrait PROG, INST,OPER;
+non terminal ArbreAbstrait PROG, INST;
 non terminal BlocDInstructions LINST;
-non terminal Instruction DECL_VAR,AFFECT,BOUCLE;
+non terminal Instruction DECL_VAR,AFFECT,BOUCLE,CONDITION;
 non terminal Expression EXP ;
 
 
@@ -119,6 +119,9 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
 
          |      BOUCLE:e
                 {: RESULT = e; :}
+
+        |      CONDITION:e
+               {: RESULT = e; :}
          ;
     
 EXP    ::=     CSTENTIERE:c
@@ -181,4 +184,24 @@ AFFECT      ::= IDF:i EGALE EXP:e
 
 BOUCLE      ::= TANTQUE EXP:e REPETER LINST:li FINTANTQUE
             {: RESULT = new Boucle(eleft,e,li); :}
+            ;
+
+CONDITION    ::= SI EXP:e ALORS LINST:l1 SINON LINST:l2 FINSI
+            {: RESULT=new SI(e,l1,l2); :}
+
+            |   SI EXP:e ALORS LINST:l1 FINSI
+            {: RESULT=new SI(e,l1,null); :}
+
+
+            |   SI EXP:e ALORS FINSI
+            {: RESULT=new SI(e,null,null); :}
+
+
+            |   SI EXP:e ALORS SINON LINST:l2 FINSI
+            {: RESULT=new SI(e,null,l2); :}
+
+
+            |   SI EXP:e ALORS SINON FINSI
+            {: RESULT=new SI(e,null,null); :}
+
             ;

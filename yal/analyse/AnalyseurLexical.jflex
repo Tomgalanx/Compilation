@@ -91,6 +91,11 @@ commentaireSlashSlash = [/][/].*
 "fintantque"            { return symbol(CodesLexicaux.FINTANTQUE);}
 "=="           { return symbol(CodesLexicaux.DOUBLEEGALE);}
 
+"si"           { return symbol(CodesLexicaux.SI);}
+"sinon"           { return symbol(CodesLexicaux.SINON);}
+"alors"           { return symbol(CodesLexicaux.ALORS);}
+"finsi"           { return symbol(CodesLexicaux.FINSI);}
+
 
 
 

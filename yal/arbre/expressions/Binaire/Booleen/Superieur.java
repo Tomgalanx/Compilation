@@ -27,4 +27,9 @@ public class Superieur extends ExpressionBinaire {
 
         return res.toString();
     }
+
+    @Override
+    public String getType() {
+        return "boolean";
+    }
 }

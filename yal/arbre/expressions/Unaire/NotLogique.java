@@ -28,4 +28,9 @@ public class NotLogique extends ExpressionBooleenUnaire {
 
         return res.toString();
     }
+
+    @Override
+    public String getType() {
+        return "boolean";
+    }
 }
