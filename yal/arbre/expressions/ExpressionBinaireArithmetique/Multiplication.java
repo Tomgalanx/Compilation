@@ -1,9 +1,10 @@
-package Compilation.yal.arbre.expressions;
+package Compilation.yal.arbre.expressions.ExpressionBinaire.Arithmetique;
 
 
+import Compilation.yal.arbre.expressions.Expression;
 import Compilation.yal.exceptions.NonDeclareException;
 
-public class Multiplication extends ExpressionArithmetique {
+public class Multiplication extends ExpressionBinaire {
 
     public Multiplication(int n, Expression gauche, Expression droite) {
         super(n, gauche, droite);
@@ -26,11 +27,15 @@ public class Multiplication extends ExpressionArithmetique {
 
         res.append(gauche.toMIPS());
 
-        res.append("move $sp,$v0 \n");
+        res.append("sw $v0,($sp) \n");
+
+        res.append("add $sp,$sp,-4 \n");
 
         res.append(droite.toMIPS());
 
-        res.append("move $t8,$sp \n");
+        res.append("add $sp,$sp,4 \n");
+
+        res.append("lw $t8,($sp) \n");
 
         res.append("mult $t8,$v0 \n");
 
