@@ -78,11 +78,12 @@ non terminal BlocDInstructions LINST;
 non terminal Instruction DECL_VAR,AFFECT,BOUCLE;
 non terminal Expression EXP ;
 
-precedence left PLUS,MOINS;
-precedence left MULT,DIV;
-precedence left INFERIEUR,SUPERIEUR;
+
 precedence left ET,OU;
 precedence left DIFFERENT,DOUBLEEGALE;
+precedence left INFERIEUR,SUPERIEUR;
+precedence left PLUS,MOINS;
+precedence left MULT,DIV;
 precedence left NON;
 
 /* ----------------------------Grammar Section-------------------- */
