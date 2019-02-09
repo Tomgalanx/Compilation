@@ -65,7 +65,7 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE,ENTIER,EGALE,LIRE,MULT,DIV,MOINS,PLUS,ET,OU,DIFFERENT,TANTQUE,REPETER,FINTANTQUE,DOUBLEEGALE,NON,INFERIEUR,SUPERIEUR ;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE,ENTIER,EGALE,LIRE,MULT,DIV,MOINS,PLUS,ET,OU,DIFFERENT,TANTQUE,REPETER,FINTANTQUE,DOUBLEEGALE,NON,INFERIEUR,SUPERIEUR,PAROUV,PARFER ;
 terminal String    IDF, CSTENTIERE ;
    
 /* Non terminals used in the grammar section.  */
@@ -153,6 +153,9 @@ EXP    ::=     CSTENTIERE:c
 
                 |  NON EXP:e
                 {: RESULT = new NotLogique(eleft,e); :}
+
+                | PAROUV EXP:e PARFER
+                {: RESULT = e ;:}
                ;
 
 
@@ -166,7 +169,6 @@ AFFECT      ::= IDF:i EGALE EXP:e
             {: RESULT = new Affectation(ileft,i,e); :}
             ;
 
-OPER        ::= PLUS | MOINS | MULT | SUPERIEUR | INFERIEUR | DIV | DOUBLEEGALE | DIFFERENT | ET | OU ;
 
 BOUCLE      ::= TANTQUE EXP:e REPETER LINST:li FINTANTQUE
             {: RESULT = new Boucle(eleft); :}

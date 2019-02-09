@@ -3,6 +3,8 @@ package Compilation.yal.arbre.instructions;
 import Compilation.yal.arbre.expressions.Expression;
 import Compilation.yal.exceptions.NonDeclareException;
 
+import java.util.UUID;
+
 public class Boucle extends Instruction{
 
     private Expression exp;
@@ -23,8 +25,22 @@ public class Boucle extends Instruction{
     @Override
     public String toMIPS() {
 
+        String hash = UUID.randomUUID().toString();
+
         String res = "" +
-                "# Boucle\n" + "\n";
+                "# Boucle\n" +
+                "tantque" +
+                hash +":\n" +
+                exp.toMIPS() +
+                "beqz $v0, fintantque"+
+                hash + "\n" +
+                "iteration" +
+                hash +":\n" +
+                inst.toMIPS() +
+                "j tantque" +
+                hash + "\n" +
+                "fintantque" +
+                hash + ":n";
 
         return res;
     }

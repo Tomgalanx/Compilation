@@ -19,13 +19,7 @@ public class Inferieur extends ExpressionBooleenBinaire {
 
         StringBuilder res =new StringBuilder("# Inferieur \n");
 
-        res.append(gauche.toMIPS());
-
-        res.append("move $sp,$v0 \n");
-
-        res.append(droite.toMIPS());
-
-        res.append("move $t8,$sp \n");
+        res.append(super.toMIPS());
 
         res.append("slt $v0,$v0,$t8 \n");
 
