@@ -1,8 +1,10 @@
-package Compilation.yal.arbre.expressions;
+package Compilation.yal.arbre.expressions.Binaire.Booleen;
 
+import Compilation.yal.arbre.expressions.Binaire.ExpressionBinaire;
+import Compilation.yal.arbre.expressions.Expression;
 import Compilation.yal.exceptions.NonDeclareException;
 
-public class EtLogique extends ExpressionBooleenBinaire {
+public class EtLogique extends ExpressionBinaire {
 
     public EtLogique(int n, Expression gauche, Expression droite) {
         super(n, gauche, droite);
@@ -21,7 +23,7 @@ public class EtLogique extends ExpressionBooleenBinaire {
 
         res.append(super.toMIPS());
 
-        res.append("and $v0,$v0,$t8 \n");
+        res.append("and $v0,$t8,$v0 \n");
 
         return res.toString();
     }

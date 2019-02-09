@@ -1,4 +1,4 @@
-package Compilation.yal.arbre.expressions.ExpressionBinaireArithmetique;
+package Compilation.yal.arbre.expressions.Binaire;
 
 import Compilation.yal.arbre.expressions.Expression;
 

@@ -1,12 +1,12 @@
-package Compilation.yal.arbre.expressions.ExpressionBinaireArithmetique;
+package Compilation.yal.arbre.expressions.Binaire.Booleen;
 
-
+import Compilation.yal.arbre.expressions.Binaire.ExpressionBinaire;
 import Compilation.yal.arbre.expressions.Expression;
 import Compilation.yal.exceptions.NonDeclareException;
 
-public class Division extends ExpressionBinaire {
+public class OuLogique extends ExpressionBinaire {
 
-    public Division(int n, Expression gauche, Expression droite) {
+    public OuLogique(int n, Expression gauche, Expression droite) {
         super(n, gauche, droite);
     }
 
@@ -19,17 +19,11 @@ public class Division extends ExpressionBinaire {
     @Override
     public String toMIPS() {
 
-
-        // Lo quotien
-        // Hi reste
-
-        StringBuilder res =new StringBuilder("# Division \n");
+        StringBuilder res =new StringBuilder("# Ou logique \n");
 
         res.append(super.toMIPS());
 
-        res.append("div $t8,$v0 \n");
-
-        res.append("mflo $v0 \n");
+        res.append("or $v0,$t8,$v0 \n");
 
         return res.toString();
     }

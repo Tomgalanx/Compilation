@@ -1,6 +1,7 @@
-package Compilation.yal.arbre.expressions.ExpressionBinaireArithmetique;
+package Compilation.yal.arbre.expressions.Binaire.Arithmetique;
 
 
+import Compilation.yal.arbre.expressions.Binaire.ExpressionBinaire;
 import Compilation.yal.arbre.expressions.Expression;
 import Compilation.yal.exceptions.NonDeclareException;
 

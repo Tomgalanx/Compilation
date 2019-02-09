@@ -1,8 +1,10 @@
-package Compilation.yal.arbre.expressions;
+package Compilation.yal.arbre.expressions.Binaire.Booleen;
 
+import Compilation.yal.arbre.expressions.Binaire.ExpressionBinaire;
+import Compilation.yal.arbre.expressions.Expression;
 import Compilation.yal.exceptions.NonDeclareException;
 
-public class Superieur extends ExpressionBooleenBinaire {
+public class Superieur extends ExpressionBinaire {
 
     public Superieur(int n, Expression gauche, Expression droite) {
         super(n, gauche, droite);

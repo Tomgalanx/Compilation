@@ -6,6 +6,7 @@ import Compilation.yal.arbre.ArbreAbstrait;
 import Compilation.yal.exceptions.AnalyseException;
 
 import java.io.*;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,6 +15,7 @@ public class Yal {
     
     public Yal(String nomFichier) {
         try {
+
             AnalyseurSyntaxique analyseur = new AnalyseurSyntaxique(new AnalyseurLexical(new FileReader(nomFichier)));
             ArbreAbstrait arbre = (ArbreAbstrait) analyseur.parse().value;
 

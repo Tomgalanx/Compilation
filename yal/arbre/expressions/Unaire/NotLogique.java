@@ -1,8 +1,10 @@
-package Compilation.yal.arbre.expressions;
+package Compilation.yal.arbre.expressions.Unaire;
 
+import Compilation.yal.arbre.expressions.Expression;
+import Compilation.yal.arbre.expressions.Unaire.ExpressionBooleenUnaire;
 import Compilation.yal.exceptions.NonDeclareException;
 
-public class NotLogique extends ExpressionBooleenUnaire{
+public class NotLogique extends ExpressionBooleenUnaire {
 
     public NotLogique(int n, Expression expression) {
         super(n, expression);

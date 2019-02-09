@@ -1,19 +1,22 @@
 package Compilation.yal.analyse ;
 
 import java.util.*;
-import Compilation.yal.arbre.expressions.*;
+import Compilation.yal.arbre.expressions.Binaire.Arithmetique.*;
+import Compilation.yal.arbre.expressions.Binaire.Booleen.*;
+import Compilation.yal.arbre.expressions.constante.*;
+import Compilation.yal.arbre.expressions.Unaire.*;
 import Compilation.yal.arbre.ArbreAbstrait;
 import Compilation.yal.arbre.BlocDInstructions;
-import Compilation.yal.arbre.expressions.ConstanteEntiere;
+import Compilation.yal.arbre.expressions.constante.ConstanteEntiere;
 import Compilation.yal.arbre.expressions.Expression;
 import Compilation.yal.arbre.expressions.IDF;
+import Compilation.yal.arbre.instructions.*;
 import Compilation.yal.arbre.instructions.Affectation;
 import Compilation.yal.arbre.instructions.Declaration;
 import Compilation.yal.arbre.instructions.Ecrire;
 import Compilation.yal.arbre.instructions.Lire;
 import Compilation.yal.arbre.instructions.Boucle;
 import Compilation.yal.exceptions.AnalyseSyntaxiqueException;
-import Compilation.yal.arbre.expressions.Addition;
 
 import java_cup.runtime.*;
 
@@ -70,7 +73,9 @@ terminal String    IDF, CSTENTIERE ;
    
 /* Non terminals used in the grammar section.  */
 
-non terminal ArbreAbstrait PROG, LINST, INST,DECL_VAR,AFFECT,OPER;
+non terminal ArbreAbstrait PROG, INST,OPER;
+non terminal BlocDInstructions LINST;
+non terminal Instruction DECL_VAR,AFFECT,BOUCLE;
 non terminal Expression EXP ;
 
 precedence left PLUS,MOINS;
@@ -110,6 +115,9 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
 
          |      LIRE IDF:i POINTVIRGULE
                 {: RESULT = new Lire(ileft,i); :}
+
+         |      BOUCLE:e
+                {: RESULT = e; :}
          ;
     
 EXP    ::=     CSTENTIERE:c
@@ -171,5 +179,5 @@ AFFECT      ::= IDF:i EGALE EXP:e
 
 
 BOUCLE      ::= TANTQUE EXP:e REPETER LINST:li FINTANTQUE
-            {: RESULT = new Boucle(eleft); :}
+            {: RESULT = new Boucle(eleft,e,li); :}
             ;

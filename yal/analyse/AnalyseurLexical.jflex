@@ -7,7 +7,7 @@ import java_cup.runtime.*;
 import Compilation.yal.exceptions.*;
 import Compilation.yal.arbre.ArbreAbstrait;
 import Compilation.yal.arbre.BlocDInstructions;
-import Compilation.yal.arbre.expressions.ConstanteEntiere;
+import Compilation.yal.arbre.expressions.constante.ConstanteEntiere;
 import Compilation.yal.arbre.expressions.Expression;
 import Compilation.yal.arbre.instructions.Affectation;
 import Compilation.yal.arbre.instructions.Declaration;
@@ -83,13 +83,13 @@ commentaireSlashSlash = [/][/].*
 
 "et"                    { return symbol(CodesLexicaux.ET);}
 "ou"                    { return symbol(CodesLexicaux.OU);}
-"inferieur"             { return symbol(CodesLexicaux.INFERIEUR);}
-"superieur"             { return symbol(CodesLexicaux.SUPERIEUR);}
+"<"             { return symbol(CodesLexicaux.INFERIEUR);}
+">"             { return symbol(CodesLexicaux.SUPERIEUR);}
 "repeter"               { return symbol(CodesLexicaux.REPETER);}
 "tantque"               { return symbol(CodesLexicaux.TANTQUE);}
 "non"                   { return symbol(CodesLexicaux.NON);}
 "fintantque"            { return symbol(CodesLexicaux.FINTANTQUE);}
-"doubleegale"           { return symbol(CodesLexicaux.DOUBLEEGALE);}
+"=="           { return symbol(CodesLexicaux.DOUBLEEGALE);}
 
 
 

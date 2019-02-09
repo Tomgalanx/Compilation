@@ -1,4 +1,4 @@
-package Compilation.yal.arbre.expressions;
+package Compilation.yal.arbre.expressions.constante;
 
 public class ConstanteEntiere extends Constante {
     

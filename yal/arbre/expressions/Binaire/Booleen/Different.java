@@ -1,8 +1,10 @@
-package Compilation.yal.arbre.expressions;
+package Compilation.yal.arbre.expressions.Binaire.Booleen;
 
+import Compilation.yal.arbre.expressions.Binaire.ExpressionBinaire;
+import Compilation.yal.arbre.expressions.Expression;
 import Compilation.yal.exceptions.NonDeclareException;
 
-public class Different extends ExpressionBooleenBinaire{
+public class Different extends ExpressionBinaire {
 
     public Different(int n, Expression gauche, Expression droite) {
         super(n, gauche, droite);
@@ -21,7 +23,7 @@ public class Different extends ExpressionBooleenBinaire{
 
         res.append(super.toMIPS());
 
-        res.append("sne $v0,$v0,$t8 \n");
+        res.append("sne $v0,$t8,$v0 \n");
 
         return res.toString();
     }
