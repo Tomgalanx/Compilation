@@ -53,8 +53,8 @@ public class BlocDInstructions extends ArbreAbstrait {
     @Override
     public String toMIPS() {
         StringBuilder sb = new StringBuilder("") ;
-        sb.append(zoneData) ;
-        sb.append(debutCode) ;
+        sb.append(zoneData);
+        sb.append(debutCode);
         sb.append(variable);
         for (ArbreAbstrait a : programme) {
             sb.append(a.toMIPS()) ;

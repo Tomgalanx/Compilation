@@ -68,6 +68,8 @@ commentaireSlashSlash = [/][/].*
 
 "="                     {   return symbol(CodesLexicaux.EGALE);}
 
+"!="               { return symbol(CodesLexicaux.DIFFERENT);}
+
 {commentaireSlashSlash} { }
 
 
@@ -76,6 +78,15 @@ commentaireSlashSlash = [/][/].*
 "/"                     { return symbol(CodesLexicaux.DIV);}
 "*"                     { return symbol(CodesLexicaux.MULT);}
 
+"et"                    { return symbol(CodesLexicaux.ET);}
+"ou"                    { return symbol(CodesLexicaux.OU);}
+"inferieur"             { return symbol(CodesLexicaux.INFERIEUR);}
+"superieur"             { return symbol(CodesLexicaux.SUPERIEUR);}
+"repeter"               { return symbol(CodesLexicaux.REPETER);}
+"tantque"               { return symbol(CodesLexicaux.TANTQUE);}
+"non"                   { return symbol(CodesLexicaux.NON);}
+"fintantque"            { return symbol(CodesLexicaux.FINTANTQUE);}
+"doubleegale"           { return symbol(CodesLexicaux.DOUBLEEGALE);}
 
 
 

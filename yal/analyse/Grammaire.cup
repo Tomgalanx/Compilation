@@ -11,6 +11,7 @@ import Compilation.yal.arbre.instructions.Affectation;
 import Compilation.yal.arbre.instructions.Declaration;
 import Compilation.yal.arbre.instructions.Ecrire;
 import Compilation.yal.arbre.instructions.Lire;
+import Compilation.yal.arbre.instructions.Boucle;
 import Compilation.yal.exceptions.AnalyseSyntaxiqueException;
 import Compilation.yal.arbre.expressions.Addition;
 
@@ -64,7 +65,7 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE,ENTIER,EGALE,LIRE,MULT,DIV,MOINS,PLUS ;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE,ENTIER,EGALE,LIRE,MULT,DIV,MOINS,PLUS,ET,OU,DIFFERENT,TANTQUE,REPETER,FINTANTQUE,DOUBLEEGALE,NON,INFERIEUR,SUPERIEUR ;
 terminal String    IDF, CSTENTIERE ;
    
 /* Non terminals used in the grammar section.  */
@@ -74,6 +75,10 @@ non terminal Expression EXP ;
 
 precedence left PLUS,MOINS;
 precedence left MULT,DIV;
+precedence left INFERIEUR,SUPERIEUR;
+precedence left ET,OU;
+precedence left DIFFERENT,DOUBLEEGALE;
+precedence left NON;
 
 /* ----------------------------Grammar Section-------------------- */
  
@@ -127,6 +132,27 @@ EXP    ::=     CSTENTIERE:c
 
                 |  MOINS EXP:c
                 {: RESULT = new ConstanteEntiere("-"+c, cleft + 1); :}
+
+                |  EXP:e1 SUPERIEUR EXP:e2
+                {: RESULT = new Superieur(e1left,e1,e2); :}
+
+                |  EXP:e1 INFERIEUR EXP:e2
+                {: RESULT = new Inferieur(e1left,e1,e2); :}
+
+                |  EXP:e1 DOUBLEEGALE EXP:e2
+                {: RESULT = new DoubleEgale(e1left,e1,e2); :}
+
+                |  EXP:e1 DIFFERENT EXP:e2
+                {: RESULT = new Different(e1left,e1,e2); :}
+
+                |  EXP:e1 ET EXP:e2
+                {: RESULT = new EtLogique(e1left,e1,e2); :}
+
+                |  EXP:e1 OU EXP:e2
+                {: RESULT = new OuLogique(e1left,e1,e2); :}
+
+                |  NON EXP:e
+                {: RESULT = new NotLogique(eleft,e); :}
                ;
 
 
@@ -140,5 +166,8 @@ AFFECT      ::= IDF:i EGALE EXP:e
             {: RESULT = new Affectation(ileft,i,e); :}
             ;
 
-OPER        ::= PLUS | MOINS | MULT | DIV ;
+OPER        ::= PLUS | MOINS | MULT | SUPERIEUR | INFERIEUR | DIV | DOUBLEEGALE | DIFFERENT | ET | OU ;
 
+BOUCLE      ::= TANTQUE EXP:e REPETER LINST:li FINTANTQUE
+            {: RESULT = new Boucle(eleft); :}
+            ;

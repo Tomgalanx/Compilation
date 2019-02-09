@@ -5,7 +5,6 @@ import Compilation.yal.exceptions.NonDeclareException;
 
 public class Lire extends Instruction {
 
-
     private final IDF idf;
 
     public Lire(int n, String idf) {

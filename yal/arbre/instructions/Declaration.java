@@ -9,7 +9,6 @@ import java.util.Objects;
 
 public class Declaration extends Instruction{
 
-
     private EntreeVariable entree;
     private SymboleVariable symbole;
 
