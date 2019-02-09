@@ -37,6 +37,6 @@ public class Division extends ExpressionBinaire {
 
     @Override
     public String getType() {
-        return "arithmetique";
+        return Expression.ARITHMETIQUE;
     }
 }

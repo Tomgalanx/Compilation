@@ -30,6 +30,6 @@ public class Superieur extends ExpressionBinaire {
 
     @Override
     public String getType() {
-        return "boolean";
+        return Expression.BOOLEEN;
     }
 }

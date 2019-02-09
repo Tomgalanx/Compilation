@@ -31,6 +31,6 @@ public class NotLogique extends ExpressionBooleenUnaire {
 
     @Override
     public String getType() {
-        return "boolean";
+        return Expression.BOOLEEN;
     }
 }

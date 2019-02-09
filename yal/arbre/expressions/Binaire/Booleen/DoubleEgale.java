@@ -30,6 +30,6 @@ public class DoubleEgale extends ExpressionBinaire {
 
     @Override
     public String getType() {
-        return "boolean";
+        return Expression.BOOLEEN;
     }
 }
