@@ -23,7 +23,7 @@ public class Superieur extends ExpressionBinaire {
 
         res.append(super.toMIPS());
 
-        res.append("slt $v0,$t8,$v0 \n");
+        res.append("sgt $v0,$t8,$v0 \n");
 
         return res.toString();
     }

@@ -58,7 +58,7 @@ public class SI extends Instruction{
         res.append(" :\n");
         res.append(exp.toMIPS());
 
-        res.append("beqz $v0, sinon_");
+        res.append("beqz $v0, else");
         res.append(hash);
         res.append("\n");
 
@@ -67,7 +67,7 @@ public class SI extends Instruction{
         res.append(" :\n");
         if(listeSi != null)
             res.append(listeSi.codeMipsInstruction());
-        res.append("j fin_");
+        res.append("j end");
         res.append(hash);
         res.append("\n");
 

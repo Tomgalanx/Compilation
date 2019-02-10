@@ -15,6 +15,8 @@ public class Soustraction extends ExpressionBinaire {
     public void verifier() throws NonDeclareException {
         gauche.verifier();
         droite.verifier();
+
+
     }
 
     @Override

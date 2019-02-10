@@ -17,6 +17,8 @@ public class BlocDInstructions extends ArbreAbstrait {
     
     protected static String zoneData = ".data\n" +
                                             "finLigne:     .asciiz \"\\n\"\n" +
+                                            "vrai:     .asciiz \"vrai\" \n" +
+                                            "faux:     .asciiz \"faux \" \n" +
                                             "              .align 2\n" ;
     
     protected static String debutCode = ".text\n" +

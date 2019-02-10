@@ -3,6 +3,7 @@ package Compilation.yal.arbre.expressions.Binaire.Arithmetique;
 
 import Compilation.yal.arbre.expressions.Binaire.ExpressionBinaire;
 import Compilation.yal.arbre.expressions.Expression;
+import Compilation.yal.exceptions.AnalyseSemantiqueException;
 import Compilation.yal.exceptions.NonDeclareException;
 
 public class Addition extends ExpressionBinaire {
@@ -15,6 +16,8 @@ public class Addition extends ExpressionBinaire {
     public void verifier() throws NonDeclareException {
         gauche.verifier();
         droite.verifier();
+
+
 
     }
 

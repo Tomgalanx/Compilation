@@ -15,6 +15,8 @@ public class Multiplication extends ExpressionBinaire {
     public void verifier() throws NonDeclareException {
         gauche.verifier();
         droite.verifier();
+
+
     }
 
     @Override

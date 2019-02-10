@@ -15,6 +15,8 @@ public class Division extends ExpressionBinaire {
     public void verifier() throws NonDeclareException {
         gauche.verifier();
         droite.verifier();
+
+
     }
 
     @Override

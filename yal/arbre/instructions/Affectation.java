@@ -3,6 +3,7 @@ package Compilation.yal.arbre.instructions;
 import Compilation.yal.arbre.TDS;
 import Compilation.yal.arbre.expressions.Expression;
 import Compilation.yal.arbre.expressions.IDF;
+import Compilation.yal.exceptions.AnalyseSemantiqueException;
 import Compilation.yal.exceptions.NonDeclareException;
 
 public class Affectation extends Instruction{
@@ -25,6 +26,11 @@ public class Affectation extends Instruction{
         idf.verifier();
 
         exp.verifier();
+
+
+        if(!exp.getType().equals(Expression.ARITHMETIQUE)){
+            throw new AnalyseSemantiqueException(exp.getNoLigne(),"Dans une affectation, l'expression doit être de type arithmetique");
+        }
 
 
     }
