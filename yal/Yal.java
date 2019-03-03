@@ -3,6 +3,7 @@ package Compilation.yal;
 import Compilation.yal.analyse.AnalyseurLexical;
 import Compilation.yal.analyse.AnalyseurSyntaxique;
 import Compilation.yal.arbre.ArbreAbstrait;
+import Compilation.yal.arbre.TDS;
 import Compilation.yal.exceptions.AnalyseException;
 
 import java.io.*;
@@ -16,8 +17,11 @@ public class Yal {
     public Yal(String nomFichier) {
         try {
 
+
             AnalyseurSyntaxique analyseur = new AnalyseurSyntaxique(new AnalyseurLexical(new FileReader(nomFichier)));
             ArbreAbstrait arbre = (ArbreAbstrait) analyseur.parse().value;
+
+            TDS.getInstance().reset();
 
             arbre.verifier() ;
             System.out.println("COMPILATION OK") ;
@@ -34,7 +38,7 @@ public class Yal {
             System.err.println(ex.getMessage());
         }
         catch (Exception ex) {
-            Logger.getLogger(Compilation.yal.Yal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Yal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -44,7 +48,7 @@ public class Yal {
             System.err.println("\tjava -jar yal.jar <fichierSource.yal>") ;
             System.exit(1) ;
         }
-        new Compilation.yal.Yal(args[0]) ;
+        new Yal(args[0]) ;
     }
     
 }

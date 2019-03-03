@@ -1,6 +1,7 @@
 package Compilation.yal.arbre.expressions.Binaire;
 
 import Compilation.yal.arbre.expressions.Expression;
+import Compilation.yal.exceptions.AnalyseSemantiqueException;
 
 public abstract class ExpressionBinaire extends Expression {
 
@@ -12,6 +13,9 @@ public abstract class ExpressionBinaire extends Expression {
         super(n);
         this.gauche = gauche;
         this.droite = droite;
+
+
+
     }
 
     @Override

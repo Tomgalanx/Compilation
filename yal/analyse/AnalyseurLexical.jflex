@@ -96,6 +96,9 @@ commentaireSlashSlash = [/][/].*
 "alors"           { return symbol(CodesLexicaux.ALORS);}
 "finsi"           { return symbol(CodesLexicaux.FINSI);}
 
+"fonction"          { return symbol(CodesLexicaux.FONCTION);}
+"retourne"          { return symbol(CodesLexicaux.RETOURNE);}
+
 
 
 

@@ -17,6 +17,10 @@ public class Addition extends ExpressionBinaire {
         gauche.verifier();
         droite.verifier();
 
+        if(!gauche.getType().equals(Expression.ARITHMETIQUE) || !droite.getType().equals(Expression.ARITHMETIQUE)){
+            throw new AnalyseSemantiqueException(getNoLigne(),"Les opérandes doivent etre de type Arithmetiques");
+        }
+
 
 
     }

@@ -23,7 +23,7 @@ public class IDF extends Expression{
     @Override
     public void verifier() throws NonDeclareException {
 
-        Symbole s = TDS.getInstance().identification(new EntreeVariable(nom,ligne));
+        Symbole s = TDS.getInstance().identification(new EntreeVariable(nom,noLigne));
 
         dep = s.deplacement();
 

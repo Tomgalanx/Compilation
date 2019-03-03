@@ -7,4 +7,9 @@ public class SymboleVariable extends Symbole{
         super(deplacement);
     }
 
+    @Override
+    public String getType() {
+        return Symbole.VARIABLE;
+    }
+
 }

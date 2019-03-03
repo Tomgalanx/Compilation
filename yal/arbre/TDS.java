@@ -3,7 +3,6 @@ package Compilation.yal.arbre;
 
 import Compilation.yal.arbre.Variables.Entree;
 import Compilation.yal.arbre.Variables.Symbole;
-import Compilation.yal.arbre.Variables.SymboleVariable;
 import Compilation.yal.exceptions.DoubleDeclarationExcepion;
 import Compilation.yal.exceptions.NonDeclareException;
 
@@ -11,16 +10,19 @@ import java.util.HashMap;
 
 public class TDS {
 
-    // Collection
-    private HashMap<Entree, Symbole> tds;
+
+    private TDSLocale courante;
 
     // Instance pour le patron singleton
     private static TDS instance = new TDS();
 
+    // Compteur de bloc
+    private static int numeroBloc=0;
+
 
     // Constructeur qui initialise la collection
     private TDS(){
-        tds = new HashMap<Entree, Symbole>();
+        courante = new TDSLocale(numeroBloc);
     }
 
 
@@ -28,50 +30,62 @@ public class TDS {
     public Symbole identification(Entree e) throws NonDeclareException {
 
         // Si le nom existe alors on retourne son contenue
-        if(tds.get(e) != null)
-            return tds.get(e);
+        if(courante.identification(e) != null)
+            return courante.identification(e);
         // Si il n'existe pas, on retourne une exception
         else
             throw new NonDeclareException(e.getLigne());
+
     }
 
 
     // Méthode qui permet d'ajouter un Symbole dans notre collection
     public void ajouter(Entree e, Symbole s) throws DoubleDeclarationExcepion {
-
-        // Si le nom existe deja dans notre collection, on retourne une exception de double declaration
-        if(tds.containsKey(e)){
-            throw new DoubleDeclarationExcepion(e.getLigne());
-        }
-
-        // Sinon on l'ajoute
-        else{
-            tds.put(e,s);
-        }
-
+        courante.ajouter(e,s);
     }
 
-
-    // Retourn la taille de la pile pour les variables
     public int getZoneVariable(){
+        return courante.getZoneVariable();
+    }
 
-        int res=4;
+    public void entreeBloc() {
 
-        for(Symbole s : tds.values()){
+        //System.out.println("entrer bloc");
 
-            if(s instanceof SymboleVariable){
-                res = res -4;
-            }
-
-        }
-
-        return res;
+        numeroBloc++;
+        TDSLocale table = new TDSLocale(courante, numeroBloc);
+        courante.ajouterEnfant(table);
+        courante = table;
 
     }
 
+
+
+    public void sortirBloc(){
+
+        //System.out.println("sortr bloc");
+        courante = courante.getPere();
+    }
+
+
+    public void visiteBloc(){
+        //System.out.println("visiter bloc");
+        numeroBloc++;
+        courante=courante.getTable(numeroBloc);
+    }
 
     // Retourne l'instance unique pour la TDS
     public static TDS getInstance(){
         return instance;
+    }
+
+    public void reset() {
+        numeroBloc=0;
+        courante = courante.getTable(0);
+    }
+
+
+    public int getNumeroBloc(){
+        return numeroBloc;
     }
 }

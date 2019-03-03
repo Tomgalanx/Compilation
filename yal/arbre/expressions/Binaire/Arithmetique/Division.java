@@ -3,6 +3,7 @@ package Compilation.yal.arbre.expressions.Binaire.Arithmetique;
 
 import Compilation.yal.arbre.expressions.Binaire.ExpressionBinaire;
 import Compilation.yal.arbre.expressions.Expression;
+import Compilation.yal.exceptions.AnalyseSemantiqueException;
 import Compilation.yal.exceptions.NonDeclareException;
 
 public class Division extends ExpressionBinaire {
@@ -16,7 +17,9 @@ public class Division extends ExpressionBinaire {
         gauche.verifier();
         droite.verifier();
 
-
+        if(!gauche.getType().equals(Expression.ARITHMETIQUE) || !droite.getType().equals(Expression.ARITHMETIQUE)){
+            throw new AnalyseSemantiqueException(getNoLigne(),"Les opérandes doivent etre de type Arithmetiques");
+        }
     }
 
     @Override

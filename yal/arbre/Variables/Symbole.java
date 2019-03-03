@@ -4,6 +4,8 @@ public abstract class Symbole {
 
 
     protected int dep;
+    public static String VARIABLE ="Variable";
+    protected static String FONCTION ="Fonction";
 
     public Symbole(int deplacement){
         dep= deplacement;
@@ -12,6 +14,8 @@ public abstract class Symbole {
     public int deplacement() {
         return dep;
     }
+
+    public abstract String getType();
 
 
 }

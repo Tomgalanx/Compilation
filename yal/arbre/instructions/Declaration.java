@@ -15,7 +15,7 @@ public class Declaration extends Instruction{
     public Declaration(int n,String nom) throws DoubleDeclarationExcepion {
         super(n);
 
-        entree = new EntreeVariable(nom,n);
+        entree = new EntreeVariable(nom,noLigne);
 
         int dep = tds.getZoneVariable();
 

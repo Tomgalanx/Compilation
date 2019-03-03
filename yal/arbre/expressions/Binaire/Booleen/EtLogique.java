@@ -2,6 +2,7 @@ package Compilation.yal.arbre.expressions.Binaire.Booleen;
 
 import Compilation.yal.arbre.expressions.Binaire.ExpressionBinaire;
 import Compilation.yal.arbre.expressions.Expression;
+import Compilation.yal.exceptions.AnalyseSemantiqueException;
 import Compilation.yal.exceptions.NonDeclareException;
 
 public class EtLogique extends ExpressionBinaire {
@@ -14,6 +15,10 @@ public class EtLogique extends ExpressionBinaire {
     public void verifier() throws NonDeclareException {
         gauche.verifier();
         droite.verifier();
+
+        if(!gauche.getType().equals(Expression.BOOLEEN) || !droite.getType().equals(Expression.BOOLEEN)){
+            throw new AnalyseSemantiqueException(getNoLigne(),"Les opérandes doivent etre de type Booleen");
+        }
     }
 
     @Override

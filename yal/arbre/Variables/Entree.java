@@ -32,4 +32,13 @@ public abstract class Entree {
 
         return ligne;
     }
+
+    public String getNom(){
+        return nom;
+    }
+
+    public String toString(){
+
+        return this.nom;
+    }
 }

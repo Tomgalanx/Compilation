@@ -8,13 +8,16 @@ package Compilation.yal.analyse;
 /** CUP generated class containing symbol constants. */
 public class CodesLexicaux {
   /* terminals */
-  public static final int IDF = 30;
-  public static final int CSTENTIERE = 31;
+  public static final int RETOURNE = 31;
+  public static final int IDF = 33;
+  public static final int CSTENTIERE = 34;
   public static final int OU = 15;
   public static final int PLUS = 13;
   public static final int LIRE = 9;
   public static final int INFERIEUR = 22;
   public static final int ECRIRE = 6;
+  public static final int DEBUT_FONCTION = 32;
+  public static final int FONCTION = 30;
   public static final int ALORS = 26;
   public static final int TANTQUE = 17;
   public static final int SUPERIEUR = 23;
@@ -71,6 +74,9 @@ public class CodesLexicaux {
   "FINSI",
   "SI",
   "SINON",
+  "FONCTION",
+  "RETOURNE",
+  "DEBUT_FONCTION",
   "IDF",
   "CSTENTIERE"
   };

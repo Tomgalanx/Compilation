@@ -1,6 +1,7 @@
 package Compilation.yal.analyse ;
 
 import java.util.*;
+import Compilation.yal.arbre.expressions.*;
 import Compilation.yal.arbre.expressions.Binaire.Arithmetique.*;
 import Compilation.yal.arbre.expressions.Binaire.Booleen.*;
 import Compilation.yal.arbre.expressions.constante.*;
@@ -17,6 +18,10 @@ import Compilation.yal.arbre.instructions.Ecrire;
 import Compilation.yal.arbre.instructions.Lire;
 import Compilation.yal.arbre.instructions.Boucle;
 import Compilation.yal.exceptions.AnalyseSyntaxiqueException;
+import Compilation.yal.arbre.TDS;
+import Compilation.yal.arbre.Variables.EntreeFonction;
+import Compilation.yal.arbre.Variables.SymboleFonction;
+import Compilation.yal.arbre.FabriqueEtiquette;
 
 import java_cup.runtime.*;
 
@@ -68,14 +73,14 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE,ENTIER,EGALE,LIRE,MULT,DIV,MOINS,PLUS,ET,OU,DIFFERENT,TANTQUE,REPETER,FINTANTQUE,DOUBLEEGALE,NON,INFERIEUR,SUPERIEUR,PAROUV,PARFER,ALORS,FINSI,SI,SINON;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE,ENTIER,EGALE,LIRE,MULT,DIV,MOINS,PLUS,ET,OU,DIFFERENT,TANTQUE,REPETER,FINTANTQUE,DOUBLEEGALE,NON,INFERIEUR,SUPERIEUR,PAROUV,PARFER,ALORS,FINSI,SI,SINON,FONCTION,RETOURNE,DEBUT_FONCTION;
 terminal String    IDF, CSTENTIERE ;
    
 /* Non terminals used in the grammar section.  */
 
 non terminal ArbreAbstrait PROG, INST;
 non terminal BlocDInstructions LINST;
-non terminal Instruction DECL_VAR,AFFECT,BOUCLE,CONDITION;
+non terminal Instruction DECL_VAR,AFFECT,BOUCLE,CONDITION,DECL_FONC;
 non terminal Expression EXP ;
 
 
@@ -90,8 +95,12 @@ precedence left NON;
  
 start with PROG ;
 
-PROG    ::=     PROGRAMME  IDF  DEBUT  LINST:li  FIN
-                {: RESULT = li ; :}
+
+PROG    ::=     PROGRAMME  IDF:i  DEBUT  LINST:li  FIN
+                {:
+                RESULT = li ;
+
+                :}
                 ;
 
 
@@ -122,6 +131,13 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
 
         |      CONDITION:e
                {: RESULT = e; :}
+
+        |       DECL_FONC:e
+                {: RESULT =e;:}
+
+        |       RETOURNE EXP:e POINTVIRGULE
+                {:
+                RESULT = new RetourneFonction(eleft,e); :}
          ;
     
 EXP    ::=     CSTENTIERE:c
@@ -168,13 +184,26 @@ EXP    ::=     CSTENTIERE:c
 
                 | PAROUV EXP:e PARFER
                 {: RESULT = e ;:}
-               ;
 
+                | IDF:i PAROUV PARFER
+                {: RESULT = new AppelDeFonction(ileft,i); :}
+               ;
 
 
 DECL_VAR    ::= ENTIER IDF:i
             {: RESULT = new Declaration(ileft,i);:}
             ;
+
+
+DECL_FONC   ::= FONCTION IDF:i DEBUT LINST:li FIN
+                {:
+                    TDS.getInstance().entreeBloc();
+                    RESULT = new Fonction(i,li,ileft);
+                    TDS.getInstance().sortirBloc();
+                 :}
+                ;
+
+
 
 
 AFFECT      ::= IDF:i EGALE EXP:e

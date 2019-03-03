@@ -1,6 +1,8 @@
 package Compilation.yal.arbre;
 
 
+import Compilation.yal.arbre.instructions.Fonction;
+import Compilation.yal.arbre.instructions.RetourneFonction;
 import Compilation.yal.exceptions.NonDeclareException;
 
 import java.util.ArrayList;
@@ -47,21 +49,33 @@ public class BlocDInstructions extends ArbreAbstrait {
 
     @Override
     public void verifier() throws NonDeclareException {
+
+        ArrayList<ArbreAbstrait> fonc = new ArrayList<>();
         for (ArbreAbstrait a : programme) {
-            a.verifier() ;
+                a.verifier();
         }
+
     }
     
     @Override
     public String toMIPS() {
+
+        ArrayList<ArbreAbstrait> fonc = new ArrayList<>();
         StringBuilder sb = new StringBuilder("") ;
         sb.append(zoneData);
         sb.append(debutCode);
         sb.append(variable);
         for (ArbreAbstrait a : programme) {
+            if(a instanceof Fonction)
+                fonc.add(a);
+            else
             sb.append(a.toMIPS()) ;
         }
         sb.append(finCode) ;
+
+        for (ArbreAbstrait a : fonc){
+            sb.append(a.toMIPS()) ;
+        }
         return sb.toString() ;
     }
 
@@ -74,5 +88,14 @@ public class BlocDInstructions extends ArbreAbstrait {
         }
 
         return sb.toString() ;
+    }
+
+    public boolean containRetour() {
+        for(ArbreAbstrait a : programme){
+            if(a instanceof RetourneFonction)
+                return true;
+        }
+
+        return false;
     }
 }
