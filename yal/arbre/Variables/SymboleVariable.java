@@ -3,8 +3,8 @@ package Compilation.yal.arbre.Variables;
 public class SymboleVariable extends Symbole{
 
 
-    public SymboleVariable(int deplacement) {
-        super(deplacement);
+    public SymboleVariable(int deplacement,int numeroBloc) {
+        super(deplacement,numeroBloc);
     }
 
     @Override

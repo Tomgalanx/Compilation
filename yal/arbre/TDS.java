@@ -6,8 +6,6 @@ import Compilation.yal.arbre.Variables.Symbole;
 import Compilation.yal.exceptions.DoubleDeclarationExcepion;
 import Compilation.yal.exceptions.NonDeclareException;
 
-import java.util.HashMap;
-
 public class TDS {
 
 
@@ -41,6 +39,7 @@ public class TDS {
 
     // Méthode qui permet d'ajouter un Symbole dans notre collection
     public void ajouter(Entree e, Symbole s) throws DoubleDeclarationExcepion {
+        System.out.println("ajoute "+e);
         courante.ajouter(e,s);
     }
 
@@ -50,7 +49,7 @@ public class TDS {
 
     public void entreeBloc() {
 
-        //System.out.println("entrer bloc");
+        System.out.println("entrer bloc");
 
         numeroBloc++;
         TDSLocale table = new TDSLocale(courante, numeroBloc);
@@ -63,13 +62,13 @@ public class TDS {
 
     public void sortirBloc(){
 
-        //System.out.println("sortr bloc");
+        System.out.println("sortr bloc");
         courante = courante.getPere();
     }
 
 
     public void visiteBloc(){
-        //System.out.println("visiter bloc");
+        System.out.println("visiter bloc");
         numeroBloc++;
         courante=courante.getTable(numeroBloc);
     }

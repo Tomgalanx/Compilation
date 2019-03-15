@@ -19,7 +19,7 @@ public class Declaration extends Instruction{
 
         int dep = tds.getZoneVariable();
 
-        symbole = new SymboleVariable(dep-4);
+        symbole = new SymboleVariable(dep-4,tds.getNumeroBloc());
 
         tds.ajouter(entree, symbole);
     }

@@ -73,14 +73,14 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE,ENTIER,EGALE,LIRE,MULT,DIV,MOINS,PLUS,ET,OU,DIFFERENT,TANTQUE,REPETER,FINTANTQUE,DOUBLEEGALE,NON,INFERIEUR,SUPERIEUR,PAROUV,PARFER,ALORS,FINSI,SI,SINON,FONCTION,RETOURNE,DEBUT_FONCTION;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE,ENTIER,EGALE,LIRE,MULT,DIV,MOINS,PLUS,ET,OU,DIFFERENT,TANTQUE,REPETER,FINTANTQUE,DOUBLEEGALE,NON,INFERIEUR,SUPERIEUR,PAROUV,PARFER,ALORS,FINSI,SI,SINON,FONCTION,RETOURNE,DEBUT_FONCTION,PARAMETER;
 terminal String    IDF, CSTENTIERE ;
    
 /* Non terminals used in the grammar section.  */
 
-non terminal ArbreAbstrait PROG, INST;
+non terminal ArbreAbstrait PROG, INST,ENTETE;
 non terminal BlocDInstructions LINST;
-non terminal Instruction DECL_VAR,AFFECT,BOUCLE,CONDITION,DECL_FONC;
+non terminal Instruction DECL_VAR,AFFECT,BOUCLE,CONDITION,DECL_FONC,BLOC;
 non terminal Expression EXP ;
 
 
@@ -195,13 +195,18 @@ DECL_VAR    ::= ENTIER IDF:i
             ;
 
 
-DECL_FONC   ::= FONCTION IDF:i DEBUT LINST:li FIN
+DECL_FONC   ::= ENTETE IDF:i PAROUV PARFER DEBUT LINST:li FIN
                 {:
-                    TDS.getInstance().entreeBloc();
-                    RESULT = new Fonction(i,li,ileft);
+
                     TDS.getInstance().sortirBloc();
-                 :}
-                ;
+                    RESULT = new Fonction(i,li,0);
+                 :};
+
+
+ENTETE         ::= FONCTION
+        {:
+                    TDS.getInstance().entreeBloc();
+        :};
 
 
 

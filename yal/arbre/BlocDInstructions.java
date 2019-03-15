@@ -98,4 +98,8 @@ public class BlocDInstructions extends ArbreAbstrait {
 
         return false;
     }
+
+    public int taille() {
+        return programme.size();
+    }
 }

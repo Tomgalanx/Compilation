@@ -18,7 +18,7 @@ public class Fonction extends Instruction{
     private  BlocDInstructions liste;
 
     // Numéro de ligne
-    private  int n;
+    private  int parametre;
 
     // Numéro de bloc
     private int numeroBloc;
@@ -33,13 +33,13 @@ public class Fonction extends Instruction{
         super(n);
         this.nom = nom;
         this.liste = liste;
-        this.n = n;
+        this.parametre = n;
         numeroBloc = TDS.getInstance().getNumeroBloc();
         zoneVariable = TDS.getInstance().getZoneVariable();
 
 
         EntreeFonction entree = new EntreeFonction(nom,noLigne);
-        SymboleFonction symbole = new SymboleFonction(zoneVariable,etiquette);
+        SymboleFonction symbole = new SymboleFonction(zoneVariable,etiquette,tds.getNumeroBloc());
 
         TDS.getInstance().ajouter(entree,symbole);
 
@@ -62,7 +62,7 @@ public class Fonction extends Instruction{
         liste.verifier();
 
         if(!liste.containRetour()){
-            throw new AnalyseSemantiqueException(getNoLigne()+1, "La fonction "+nom+" Doit avoir un retour");
+            throw new AnalyseSemantiqueException(getNoLigne()+1, "La fonction "+nom+" doit avoir un retour");
         }
 
         // Si on n'a pas détécté d'erreur, on peut sortir du bloc

@@ -2,7 +2,6 @@ package Compilation.yal.arbre;
 
 import Compilation.yal.arbre.Variables.Entree;
 import Compilation.yal.arbre.Variables.Symbole;
-import Compilation.yal.arbre.Variables.SymboleVariable;
 import Compilation.yal.exceptions.DoubleDeclarationExcepion;
 import Compilation.yal.exceptions.NonDeclareException;
 
@@ -48,6 +47,7 @@ public class TDSLocale {
         // Si le nom existe alors on retourne son contenu
 
         if(tds.get(e) != null){
+            //System.out.println("j'ai trouve "+e+" dans le bloc "+numeroBloc);
             return tds.get(e);
         }
 
@@ -56,6 +56,10 @@ public class TDSLocale {
             if(tds.identification(e)!= null){
                 return tds.identification(e);
             }
+        }
+
+        if(pere !=null){
+            return pere.identification(e);
         }
 
 

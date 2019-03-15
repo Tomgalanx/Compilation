@@ -11,6 +11,8 @@ public class IDF extends Expression{
     private int dep;
 
     private int ligne;
+    private int numeroBloc;
+
     // Constructeur de l'identifiant :
     // n : Numro de ligne
     // nom : nom de l'identifiant
@@ -38,11 +40,44 @@ public class IDF extends Expression{
     @Override
     public String toMIPS() {
 
-        String res ="#Load word \n" +
-                "lw $v0,"+dep+"($s7) \n";
+        StringBuilder res = new StringBuilder(50);
 
 
-        return res;
+        res.append("# Récupère la base courante\n");
+        res.append("move $t2, $s7\n");
+
+        res.append("# Récupère le numéro de région où est déclarée la variable\n");
+        res.append("li $v1, ");
+        res.append(numeroBloc);
+        res.append("\n");
+
+        res.append("tq_");
+        res.append(hashCode());
+        res.append(" :\n");
+
+        res.append("lw $v0, 4($t2) \n");
+        res.append("sub $v0, $v0, $v1\n");
+
+        res.append("beqz $v0, fintq_");
+        res.append(hashCode());
+        res.append("\n");
+
+        res.append("lw $t2, 8($t2) \n");
+        res.append("j tq_");
+        res.append(hashCode());
+        res.append("\n");
+
+        res.append("fintq_");
+        res.append(hashCode());
+        res.append(" :\n");
+
+        res.append("# Chargement dans $v0\n");
+        res.append("lw $v0, ");
+        res.append(dep);
+        res.append("($t2)");
+        res.append("\n");
+
+        return res.toString();
     }
 
     @Override
