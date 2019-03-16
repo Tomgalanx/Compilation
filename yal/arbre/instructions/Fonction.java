@@ -29,6 +29,8 @@ public class Fonction extends Instruction{
     // On génére l'étiquette pour le code mips
     private String etiquette = "fonc_"+FabriqueEtiquette.getEtiquette();
 
+    private static int compteur=1;
+
     public Fonction(String nom, BlocDInstructions liste, int n){
         super(n);
         this.nom = nom;
@@ -38,23 +40,31 @@ public class Fonction extends Instruction{
         zoneVariable = TDS.getInstance().getZoneVariable();
 
 
-        EntreeFonction entree = new EntreeFonction(nom,noLigne);
+        EntreeFonction entree = new EntreeFonction(nom,parametre);
         SymboleFonction symbole = new SymboleFonction(zoneVariable,etiquette,tds.getNumeroBloc());
 
         TDS.getInstance().ajouter(entree,symbole);
+
+
 
     }
 
     @Override
     public void verifier() throws NonDeclareException {
 
-        EntreeFonction entreeFonction = new EntreeFonction(nom,noLigne);
+        EntreeFonction entreeFonction = new EntreeFonction(nom,parametre);
         SymboleFonction symboleFonction = (SymboleFonction) TDS.getInstance().identification(entreeFonction);
 
         // On vérifie que la fonction a été déclaré
         if (symboleFonction == null) {
             throw new AnalyseSemantiqueException(getNoLigne()+1, "La fonction "+nom+" n'est pas déclaré ");
         }
+
+        numeroBloc= compteur;
+
+        compteur++;
+
+        System.out.println("Numero de bloc fonc "+numeroBloc);
 
         // On rentre dans le bloc pour faire l'analyse sémantique des instructions
         TDS.getInstance().visiteBloc();

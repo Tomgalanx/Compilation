@@ -71,7 +71,7 @@ public class TDSLocale {
     // Méthode qui permet d'ajouter un Symbole dans notre collection
     public void ajouter(Entree e, Symbole s) throws DoubleDeclarationExcepion {
 
-       // System.out.println("ajoue "+e);
+        // System.out.println("ajoue "+e);
 
         // Si le nom existe deja dans notre collection, on retourne une exception de double declaration
         if (tds.containsKey(e)) {
@@ -93,10 +93,10 @@ public class TDSLocale {
         int res = 0;
 
         for (Symbole s : tds.values()) {
+                if (s.getType().equals(Symbole.VARIABLE)) {
+                    res = res - 4;
+                }
 
-            if (s.getType().equals(Symbole.VARIABLE)) {
-                res = res - 4;
-            }
 
         }
 

@@ -1,5 +1,6 @@
 package Compilation.yal.arbre.expressions;
 
+import Compilation.yal.arbre.FabriqueEtiquette;
 import Compilation.yal.arbre.TDS;
 import Compilation.yal.arbre.Variables.EntreeVariable;
 import Compilation.yal.arbre.Variables.Symbole;
@@ -29,6 +30,8 @@ public class IDF extends Expression{
 
         dep = s.deplacement();
 
+        numeroBloc = s.getNumBloc();
+
 
     }
 
@@ -40,7 +43,11 @@ public class IDF extends Expression{
     @Override
     public String toMIPS() {
 
-        StringBuilder res = new StringBuilder(50);
+        StringBuilder res = new StringBuilder();
+
+        int etiquette = FabriqueEtiquette.getEtiquette();
+
+        System.out.println("idf toMips "+nom+" "+numeroBloc);
 
 
         res.append("# Récupère la base courante\n");
@@ -52,23 +59,23 @@ public class IDF extends Expression{
         res.append("\n");
 
         res.append("tq_");
-        res.append(hashCode());
+        res.append(etiquette);
         res.append(" :\n");
 
         res.append("lw $v0, 4($t2) \n");
         res.append("sub $v0, $v0, $v1\n");
 
         res.append("beqz $v0, fintq_");
-        res.append(hashCode());
+        res.append(etiquette);
         res.append("\n");
 
         res.append("lw $t2, 8($t2) \n");
         res.append("j tq_");
-        res.append(hashCode());
+        res.append(etiquette);
         res.append("\n");
 
         res.append("fintq_");
-        res.append(hashCode());
+        res.append(etiquette);
         res.append(" :\n");
 
         res.append("# Chargement dans $v0\n");
@@ -83,5 +90,10 @@ public class IDF extends Expression{
     @Override
     public String getType() {
         return Expression.ARITHMETIQUE;
+    }
+
+
+    public String getNom() {
+        return nom;
     }
 }

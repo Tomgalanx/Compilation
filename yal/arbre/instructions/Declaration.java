@@ -22,6 +22,8 @@ public class Declaration extends Instruction{
         symbole = new SymboleVariable(dep-4,tds.getNumeroBloc());
 
         tds.ajouter(entree, symbole);
+
+        System.out.println("Declaration "+nom+" "+tds.getNumeroBloc());
     }
 
     @Override

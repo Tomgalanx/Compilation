@@ -6,7 +6,7 @@ public class SymboleFonction extends Symbole{
     private String etiquette;
 
     public SymboleFonction(int deplacement,String e,int numero) {
-        super(deplacement, numero);
+        super(deplacement, 0);
         etiquette=e;
     }
 

@@ -1,6 +1,7 @@
 package Compilation.yal.analyse ;
 
 import java.util.*;
+import Compilation.yal.arbre.Variables.*;
 import Compilation.yal.arbre.expressions.*;
 import Compilation.yal.arbre.expressions.Binaire.Arithmetique.*;
 import Compilation.yal.arbre.expressions.Binaire.Booleen.*;
@@ -73,8 +74,8 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE,ENTIER,EGALE,LIRE,MULT,DIV,MOINS,PLUS,ET,OU,DIFFERENT,TANTQUE,REPETER,FINTANTQUE,DOUBLEEGALE,NON,INFERIEUR,SUPERIEUR,PAROUV,PARFER,ALORS,FINSI,SI,SINON,FONCTION,RETOURNE,DEBUT_FONCTION,PARAMETER;
-terminal String    IDF, CSTENTIERE ;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE,ENTIER,EGALE,LIRE,MULT,DIV,MOINS,PLUS,ET,OU,DIFFERENT,TANTQUE,REPETER,FINTANTQUE,DOUBLEEGALE,NON,INFERIEUR,SUPERIEUR,PAROUV,PARFER,ALORS,FINSI,SI,SINON,FONCTION,RETOURNE,DEBUT_FONCTION;
+terminal String    IDF, CSTENTIERE;
    
 /* Non terminals used in the grammar section.  */
 
@@ -82,6 +83,8 @@ non terminal ArbreAbstrait PROG, INST,ENTETE;
 non terminal BlocDInstructions LINST;
 non terminal Instruction DECL_VAR,AFFECT,BOUCLE,CONDITION,DECL_FONC,BLOC;
 non terminal Expression EXP ;
+non terminal Integer PARAMETER,DECL_PAR;
+non terminal ArrayList<Expression> LISTEPARA;
 
 
 precedence left ET,OU;
@@ -187,7 +190,23 @@ EXP    ::=     CSTENTIERE:c
 
                 | IDF:i PAROUV PARFER
                 {: RESULT = new AppelDeFonction(ileft,i); :}
+
+                | IDF:i PAROUV LISTEPARA:par PARFER
+                {:RESULT = new AppelDeFonction(ileft,i,par); :}
                ;
+
+
+LISTEPARA    ::=    LISTEPARA:par POINTVIRGULE EXP:exp
+                  {: par.add(exp);
+		             RESULT = par;
+		          :}
+           |
+                  EXP:exp
+                  {: ArrayList<Expression> par = new ArrayList<>();
+                     par.add(exp);
+		             RESULT = par;
+                  :}
+                  ;
 
 
 DECL_VAR    ::= ENTIER IDF:i
@@ -198,15 +217,42 @@ DECL_VAR    ::= ENTIER IDF:i
 DECL_FONC   ::= ENTETE IDF:i PAROUV PARFER DEBUT LINST:li FIN
                 {:
 
+
                     TDS.getInstance().sortirBloc();
                     RESULT = new Fonction(i,li,0);
-                 :};
+
+                 :}
+                 |
+
+                 ENTETE IDF:i PAROUV PARAMETER:p PARFER DEBUT LINST:li FIN
+                  {:
+                  TDS.getInstance().sortirBloc();
+                  RESULT = new Fonction(i,li,p);
+                   :};
 
 
 ENTETE         ::= FONCTION
         {:
                     TDS.getInstance().entreeBloc();
         :};
+
+
+
+PARAMETER    ::=    DECL_PAR POINTVIRGULE PARAMETER:nb
+                   {: RESULT = nb + 1; :}
+            |
+                   DECL_PAR
+                   {: RESULT = 1; :}
+                   ;
+
+DECL_PAR    ::=    ENTIER:t IDF:idf
+                   {:
+                   EntreeVariable e = new EntreeVariable(idf, tleft);
+                   SymboleParametre s = new SymboleParametre( TDS.getInstance().getZoneVariable(),TDS.getInstance().getNumeroBloc());
+                    TDS.getInstance().ajouter(e, s);
+                    System.out.println("para ajouté");
+                   :}
+                   ;
 
 
 

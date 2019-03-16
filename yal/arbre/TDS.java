@@ -10,6 +10,7 @@ public class TDS {
 
 
     private TDSLocale courante;
+    private TDSLocale premiere;
 
     // Instance pour le patron singleton
     private static TDS instance = new TDS();
@@ -20,19 +21,26 @@ public class TDS {
 
     // Constructeur qui initialise la collection
     private TDS(){
-        courante = new TDSLocale(numeroBloc);
+        this.premiere = new TDSLocale(numeroBloc);
+        courante =premiere;
     }
 
 
     // Méthode qui permet de teste si un nom existe dans notre programme
     public Symbole identification(Entree e) throws NonDeclareException {
 
-        // Si le nom existe alors on retourne son contenue
-        if(courante.identification(e) != null)
-            return courante.identification(e);
-        // Si il n'existe pas, on retourne une exception
-        else
+        try {
+
+            // Si le nom existe alors on retourne son contenue
+            if (courante.identification(e) != null)
+                return courante.identification(e);
+                // Si il n'existe pas, on retourne une exception
+            else
+                throw new NonDeclareException(e.getLigne());
+        }
+        catch (StackOverflowError e1){
             throw new NonDeclareException(e.getLigne());
+        }
 
     }
 
@@ -49,9 +57,10 @@ public class TDS {
 
     public void entreeBloc() {
 
-        System.out.println("entrer bloc");
+
 
         numeroBloc++;
+        System.out.println("entrer bloc "+ numeroBloc);
         TDSLocale table = new TDSLocale(courante, numeroBloc);
         courante.ajouterEnfant(table);
         courante = table;
@@ -80,11 +89,11 @@ public class TDS {
 
     public void reset() {
         numeroBloc=0;
-        courante = courante.getTable(0);
+        courante = premiere;
     }
 
 
     public int getNumeroBloc(){
-        return numeroBloc;
+        return courante.getNumero();
     }
 }

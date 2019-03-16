@@ -3,6 +3,7 @@ package Compilation.yal.arbre.Variables;
 public abstract class Symbole {
 
 
+    public static String PARAMETRE = "para";
     protected int dep;
     protected int numeroBloc;
     public static String VARIABLE ="Variable";
@@ -20,4 +21,7 @@ public abstract class Symbole {
     public abstract String getType();
 
 
+    public int getNumBloc() {
+        return numeroBloc;
+    }
 }

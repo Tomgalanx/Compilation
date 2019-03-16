@@ -12,7 +12,7 @@ public abstract class ArbreAbstrait {
     }
 
     public int getNoLigne() {
-            return noLigne ;
+            return noLigne+1 ;
     }
 
     public abstract void verifier() throws NonDeclareException;
