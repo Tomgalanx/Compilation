@@ -2,12 +2,9 @@ package Compilation.yal.arbre.expressions;
 
 import Compilation.yal.arbre.TDS;
 import Compilation.yal.arbre.Variables.EntreeFonction;
-import Compilation.yal.arbre.Variables.EntreeVariable;
 import Compilation.yal.arbre.Variables.SymboleFonction;
-import Compilation.yal.arbre.Variables.SymboleParametre;
 import Compilation.yal.exceptions.AnalyseSemantiqueException;
 import Compilation.yal.exceptions.NonDeclareException;
-import com.sun.xml.internal.bind.v2.model.core.ID;
 
 import java.util.ArrayList;
 
@@ -30,7 +27,6 @@ public class AppelDeFonction extends Expression {
         super(n);
         this.nom = nom;
         this.parametres=liste;
-
         zoneVar = TDS.getInstance().getZoneVariable();
 
     }
@@ -50,12 +46,12 @@ public class AppelDeFonction extends Expression {
     @Override
     public void verifier() throws NonDeclareException {
 
-        EntreeFonction e = new EntreeFonction(nom, parametres.size());
+        EntreeFonction e = new EntreeFonction(nom, parametres.size(),noLigne);
         SymboleFonction s = (SymboleFonction) TDS.getInstance().identification(e);
 
         // Si la fonction n'existe pas, on envoie une erreur sémantique
         if (s == null) {
-            throw new AnalyseSemantiqueException(getNoLigne()+1, "aucune déclaration de `" + nom + "()`");
+            throw new AnalyseSemantiqueException(getNoLigne()+1, "aucune déclaration de " + nom + "()");
         }
 
         // Sinon on récupert l'étquette MIPS de la fonction
@@ -78,8 +74,18 @@ public class AppelDeFonction extends Expression {
     @Override
     public String toMIPS() {
 
+
         /*
         StringBuilder res = new StringBuilder();
+
+          int i =1;
+        for(Expression expression : parametres){
+            res.append(expression.toMIPS());
+            res.append("sw $v0, ");
+            res.append(i * 4);
+            res.append("($sp)\n");
+            i++;
+        }
 
         res.append("# Saut vers la fonction\n");
         res.append("# On prépare la valeur de retour\n");
@@ -95,25 +101,35 @@ public class AppelDeFonction extends Expression {
         res.append("lw $v0, 0($sp)\n");
         res.append("\n");
 
+        res.append("# Dépiler les paramètres\n");
+        res.append("add $sp, $sp, ");
+        res.append(parametres.size() * 4);
+        res.append("\n\n");
+
 
         return res.toString();
 
         */
 
-        StringBuilder appel = new StringBuilder(50);
+
+
+
+        StringBuilder appel = new StringBuilder();
+
 
         appel.append("# Allocation de la place pour les paramètres\n");
         appel.append("add $sp, $sp, -");
         appel.append(parametres.size() * 4);
         appel.append("\n\n");
 
-        for (int i = 1; i <= parametres.size(); i ++) {
-            Expression parEff = parametres.get(i - 1);
-
-            appel.append(parEff.toMIPS());
+        int i =1;
+        for(Expression expression : parametres){
+            //System.out.println(expression);
+            appel.append(expression.toMIPS());
             appel.append("sw $v0, ");
             appel.append(i * 4);
             appel.append("($sp)\n");
+            i++;
         }
 
         appel.append("# Appel d'une fonction \n");

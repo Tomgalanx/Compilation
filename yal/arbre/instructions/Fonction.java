@@ -5,8 +5,12 @@ import Compilation.yal.arbre.FabriqueEtiquette;
 import Compilation.yal.arbre.TDS;
 import Compilation.yal.arbre.Variables.EntreeFonction;
 import Compilation.yal.arbre.Variables.SymboleFonction;
+import Compilation.yal.arbre.expressions.Expression;
+import Compilation.yal.arbre.expressions.IDF;
 import Compilation.yal.exceptions.AnalyseSemantiqueException;
 import Compilation.yal.exceptions.NonDeclareException;
+
+import java.util.ArrayList;
 
 public class Fonction extends Instruction{
 
@@ -40,7 +44,7 @@ public class Fonction extends Instruction{
         zoneVariable = TDS.getInstance().getZoneVariable();
 
 
-        EntreeFonction entree = new EntreeFonction(nom,parametre);
+        EntreeFonction entree = new EntreeFonction(nom,parametre,noLigne);
         SymboleFonction symbole = new SymboleFonction(zoneVariable,etiquette,tds.getNumeroBloc());
 
         TDS.getInstance().ajouter(entree,symbole);
@@ -52,7 +56,7 @@ public class Fonction extends Instruction{
     @Override
     public void verifier() throws NonDeclareException {
 
-        EntreeFonction entreeFonction = new EntreeFonction(nom,parametre);
+        EntreeFonction entreeFonction = new EntreeFonction(nom,parametre,noLigne);
         SymboleFonction symboleFonction = (SymboleFonction) TDS.getInstance().identification(entreeFonction);
 
         // On vérifie que la fonction a été déclaré
@@ -64,7 +68,8 @@ public class Fonction extends Instruction{
 
         compteur++;
 
-        System.out.println("Numero de bloc fonc "+numeroBloc);
+       // System.out.println("Numero de bloc fonc "+numeroBloc);
+
 
         // On rentre dans le bloc pour faire l'analyse sémantique des instructions
         TDS.getInstance().visiteBloc();
@@ -108,7 +113,8 @@ public class Fonction extends Instruction{
         res.append("move $s7, $sp\n");
 
         res.append("#Zone variables\n");
-        res.append("add $sp, $sp, -" + zoneVariable + "\n");
+        res.append("add $sp, $sp," + zoneVariable + "\n");
+
 
         res.append("# Liste d'instructions de la fonction\n");
         res.append(liste.codeMipsInstruction());

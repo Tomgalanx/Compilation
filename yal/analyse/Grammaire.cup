@@ -74,7 +74,7 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE,ENTIER,EGALE,LIRE,MULT,DIV,MOINS,PLUS,ET,OU,DIFFERENT,TANTQUE,REPETER,FINTANTQUE,DOUBLEEGALE,NON,INFERIEUR,SUPERIEUR,PAROUV,PARFER,ALORS,FINSI,SI,SINON,FONCTION,RETOURNE,DEBUT_FONCTION;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE,ENTIER,EGALE,LIRE,MULT,DIV,MOINS,PLUS,ET,OU,DIFFERENT,TANTQUE,REPETER,FINTANTQUE,DOUBLEEGALE,NON,INFERIEUR,SUPERIEUR,PAROUV,PARFER,ALORS,FINSI,SI,SINON,FONCTION,RETOURNE,DEBUT_FONCTION,VIRGULE;
 terminal String    IDF, CSTENTIERE;
    
 /* Non terminals used in the grammar section.  */
@@ -196,7 +196,7 @@ EXP    ::=     CSTENTIERE:c
                ;
 
 
-LISTEPARA    ::=    LISTEPARA:par POINTVIRGULE EXP:exp
+LISTEPARA    ::=    LISTEPARA:par VIRGULE EXP:exp
                   {: par.add(exp);
 		             RESULT = par;
 		          :}
@@ -214,27 +214,29 @@ DECL_VAR    ::= ENTIER IDF:i
             ;
 
 
-DECL_FONC   ::= ENTETE IDF:i PAROUV PARFER DEBUT LINST:li FIN
-                {:
-
-
-                    TDS.getInstance().sortirBloc();
-                    RESULT = new Fonction(i,li,0);
-
-                 :}
-                 |
-
-                 ENTETE IDF:i PAROUV PARAMETER:p PARFER DEBUT LINST:li FIN
+DECL_FONC   ::= ENTETE IDF:i PAROUV PARAMETER:p PARFER DEBUT LINST:li FIN
                   {:
                   TDS.getInstance().sortirBloc();
                   RESULT = new Fonction(i,li,p);
-                   :};
+                   :}
+
+                   |
+
+                   ENTETE IDF:i PAROUV PARFER DEBUT LINST:li FIN
+                   {:
+                    TDS.getInstance().sortirBloc();
+                    RESULT = new Fonction(i,li,0);
+                    :}
+                 ;
+
 
 
 ENTETE         ::= FONCTION
         {:
                     TDS.getInstance().entreeBloc();
         :};
+
+
 
 
 
@@ -247,10 +249,7 @@ PARAMETER    ::=    DECL_PAR POINTVIRGULE PARAMETER:nb
 
 DECL_PAR    ::=    ENTIER:t IDF:idf
                    {:
-                   EntreeVariable e = new EntreeVariable(idf, tleft);
-                   SymboleParametre s = new SymboleParametre( TDS.getInstance().getZoneVariable(),TDS.getInstance().getNumeroBloc());
-                    TDS.getInstance().ajouter(e, s);
-                    System.out.println("para ajouté");
+                  new DeclarationParametre(idfleft,idf);
                    :}
                    ;
 

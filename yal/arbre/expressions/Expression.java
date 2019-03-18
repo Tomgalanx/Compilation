@@ -5,6 +5,7 @@ import Compilation.yal.arbre.ArbreAbstrait;
 public abstract class Expression extends ArbreAbstrait {
 
 
+    public static String PARAMETRE = "para";
     public static String BOOLEEN = "boolean";
     public static String ARITHMETIQUE = "arithmetique";
     public static String IDF ="idf";

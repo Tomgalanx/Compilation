@@ -5,8 +5,8 @@ import java.util.Objects;
 public abstract class Entree {
 
 
-    private String nom;
-    private int ligne;
+    protected String nom;
+    protected int ligne;
 
 
     public Entree(String nom,int ligne){

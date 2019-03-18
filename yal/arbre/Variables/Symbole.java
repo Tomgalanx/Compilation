@@ -1,5 +1,7 @@
 package Compilation.yal.arbre.Variables;
 
+import Compilation.yal.arbre.TDS;
+
 public abstract class Symbole {
 
 
@@ -11,6 +13,11 @@ public abstract class Symbole {
 
     public Symbole(int deplacement,int numeroBloc){
         dep= deplacement;
+        this.numeroBloc = numeroBloc;
+    }
+
+    public Symbole(int numeroBloc){
+        //dep= TDS.getInstance().getZoneVariable()-4;
         this.numeroBloc = numeroBloc;
     }
 

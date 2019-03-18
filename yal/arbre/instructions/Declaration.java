@@ -17,13 +17,16 @@ public class Declaration extends Instruction{
 
         entree = new EntreeVariable(nom,noLigne);
 
+        //System.out.println("Declaration "+nom+" "+tds.getNumeroBloc());
+
         int dep = tds.getZoneVariable();
+
+       // System.out.println("Declaration var"+nom+" "+dep);
+
 
         symbole = new SymboleVariable(dep-4,tds.getNumeroBloc());
 
         tds.ajouter(entree, symbole);
-
-        System.out.println("Declaration "+nom+" "+tds.getNumeroBloc());
     }
 
     @Override

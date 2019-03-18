@@ -47,8 +47,6 @@ public class IDF extends Expression{
 
         int etiquette = FabriqueEtiquette.getEtiquette();
 
-        System.out.println("idf toMips "+nom+" "+numeroBloc);
-
 
         res.append("# Récupère la base courante\n");
         res.append("move $t2, $s7\n");
@@ -62,6 +60,7 @@ public class IDF extends Expression{
         res.append(etiquette);
         res.append(" :\n");
 
+        res.append("\n # bataradé\n");
         res.append("lw $v0, 4($t2) \n");
         res.append("sub $v0, $v0, $v1\n");
 
@@ -95,5 +94,10 @@ public class IDF extends Expression{
 
     public String getNom() {
         return nom;
+    }
+
+
+    public int getNumeroBloc() {
+        return numeroBloc;
     }
 }

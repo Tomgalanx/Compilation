@@ -52,11 +52,7 @@ public class TDSLocale {
         }
 
 
-        for(TDSLocale tds : enfants){
-            if(tds.identification(e)!= null){
-                return tds.identification(e);
-            }
-        }
+
 
         if(pere !=null){
             return pere.identification(e);
@@ -71,7 +67,7 @@ public class TDSLocale {
     // Méthode qui permet d'ajouter un Symbole dans notre collection
     public void ajouter(Entree e, Symbole s) throws DoubleDeclarationExcepion {
 
-        // System.out.println("ajoue "+e);
+        //System.out.println("ajoue "+e);
 
         // Si le nom existe deja dans notre collection, on retourne une exception de double declaration
         if (tds.containsKey(e)) {
@@ -96,6 +92,23 @@ public class TDSLocale {
                 if (s.getType().equals(Symbole.VARIABLE)) {
                     res = res - 4;
                 }
+
+
+        }
+
+        return res;
+
+    }
+
+    // Retourne la taille de la pile pour les parametres
+    public int getZoneParametre() {
+
+        int res = 0;
+
+        for (Symbole s : tds.values()) {
+            if (s.getType().equals(Symbole.PARAMETRE)) {
+                res = res - 4;
+            }
 
 
         }

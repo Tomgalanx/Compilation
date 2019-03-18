@@ -33,6 +33,16 @@ public class BlocDInstructions extends ArbreAbstrait {
     protected static String variable = " # initialiser s7 avec sp (initialisation de la base des variables)\n" +
             "    move $s7,$sp \n";
 
+    public void numeroBlocMain(StringBuilder res) {
+        res.append("# Empile le numéro de région\n");
+        res.append("li $t8, 0\n");
+        res.append("sw $t8, 0($sp)\n");
+        res.append("addi $sp, $sp, -4\n");
+
+
+
+    }
+
     public BlocDInstructions(int n) {
         super(n) ;
         programme = new ArrayList<>() ;
@@ -50,7 +60,6 @@ public class BlocDInstructions extends ArbreAbstrait {
     @Override
     public void verifier() throws NonDeclareException {
 
-        ArrayList<ArbreAbstrait> fonc = new ArrayList<>();
         for (ArbreAbstrait a : programme) {
                 a.verifier();
         }
@@ -64,6 +73,7 @@ public class BlocDInstructions extends ArbreAbstrait {
         StringBuilder sb = new StringBuilder("") ;
         sb.append(zoneData);
         sb.append(debutCode);
+        //base(sb);
         sb.append(variable);
         for (ArbreAbstrait a : programme) {
             if(a instanceof Fonction)
