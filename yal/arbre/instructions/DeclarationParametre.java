@@ -17,14 +17,11 @@ public class DeclarationParametre extends Instruction{
     public DeclarationParametre(int n,String nom) throws DoubleDeclarationExcepion {
         super(n);
 
-        entree = new EntreeVariable(nom,noLigne);
-
+        EntreeVariable entree = new EntreeVariable(nom,noLigne);
 
         int dep = tds.getZoneParametre()-4;
 
-        //System.out.println("declaration para "+nom+" "+dep);
-
-        symbole = new SymboleParametre(dep,tds.getNumeroBloc());
+        SymboleParametre symbole = new SymboleParametre(dep,tds.getNumeroBloc());
 
         tds.ajouter(entree, symbole);
 

@@ -905,7 +905,8 @@ class CUP$AnalyseurSyntaxique$actions {
           case 36: // PARAMETER ::= DECL_PAR 
             {
               Integer RESULT =null;
-		 RESULT = 1; 
+		
+                   RESULT = 1; 
               CUP$AnalyseurSyntaxique$result = parser.getSymbolFactory().newSymbol("PARAMETER",11, ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()), ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()), RESULT);
             }
           return CUP$AnalyseurSyntaxique$result;
@@ -921,7 +922,15 @@ class CUP$AnalyseurSyntaxique$actions {
 		int idfright = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).right;
 		String idf = (String)((java_cup.runtime.Symbol) CUP$AnalyseurSyntaxique$stack.peek()).value;
 		
-                  new DeclarationParametre(idfleft,idf);
+
+                   System.out.println("declaration grammaire de :"+idf);
+                   EntreeVariable entree = new EntreeVariable(idf,idfleft);
+
+                          int dep = TDS.getInstance().getZoneParametre()-4;
+
+                          SymboleParametre symbole = new SymboleParametre(dep,TDS.getInstance().getNumeroBloc());
+
+                          TDS.getInstance().ajouter(entree, symbole);
                    
               CUP$AnalyseurSyntaxique$result = parser.getSymbolFactory().newSymbol("DECL_PAR",12, ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.elementAt(CUP$AnalyseurSyntaxique$top-1)), ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()), RESULT);
             }

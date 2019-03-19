@@ -111,7 +111,11 @@ public class TDSLocale {
             }
 
 
+
+
         }
+
+        System.out.println("le deplacement des parametres est : "+res );
 
         return res;
 

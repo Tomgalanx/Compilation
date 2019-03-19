@@ -21,6 +21,7 @@ public class BlocDInstructions extends ArbreAbstrait {
                                             "finLigne:     .asciiz \"\\n\"\n" +
                                             "vrai:     .asciiz \"vrai\" \n" +
                                             "faux:     .asciiz \"faux \" \n" +
+                                            "division:     .asciiz \"Division par 0 interdite \" \n" +
                                             "              .align 2\n" ;
     
     protected static String debutCode = ".text\n" +
@@ -40,8 +41,8 @@ public class BlocDInstructions extends ArbreAbstrait {
         res.append("addi $sp, $sp, -4\n");
 
 
-
     }
+
 
     public BlocDInstructions(int n) {
         super(n) ;
@@ -73,7 +74,7 @@ public class BlocDInstructions extends ArbreAbstrait {
         StringBuilder sb = new StringBuilder("") ;
         sb.append(zoneData);
         sb.append(debutCode);
-        //base(sb);
+        numeroBlocMain(sb);
         sb.append(variable);
         for (ArbreAbstrait a : programme) {
             if(a instanceof Fonction)

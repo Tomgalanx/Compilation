@@ -40,13 +40,13 @@ public class Affectation extends Instruction{
     public String toMIPS() {
 
 
-        String res = "# Affectation \n" +
-                idf.toMIPS() + exp.toMIPS() + "" +
-                "sw $v0," + idf.getDep() + "($s7)\n";
+        String res ="# Affectation \n"+
+                idf.toMIPS() + exp.toMIPS()+"" +
+                "sw $v0,"+idf.getDep()+"($s7)\n";
 
 
         return res;
-    }
+        }
 
 
 }

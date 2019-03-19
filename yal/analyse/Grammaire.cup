@@ -244,12 +244,21 @@ PARAMETER    ::=    DECL_PAR POINTVIRGULE PARAMETER:nb
                    {: RESULT = nb + 1; :}
             |
                    DECL_PAR
-                   {: RESULT = 1; :}
+                   {:
+                   RESULT = 1; :}
                    ;
 
 DECL_PAR    ::=    ENTIER:t IDF:idf
                    {:
-                  new DeclarationParametre(idfleft,idf);
+
+                   System.out.println("declaration grammaire de :"+idf);
+                   EntreeVariable entree = new EntreeVariable(idf,idfleft);
+
+                          int dep = TDS.getInstance().getZoneParametre()-4;
+
+                          SymboleParametre symbole = new SymboleParametre(dep,TDS.getInstance().getNumeroBloc());
+
+                          TDS.getInstance().ajouter(entree, symbole);
                    :}
                    ;
 

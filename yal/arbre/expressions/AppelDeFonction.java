@@ -7,6 +7,7 @@ import Compilation.yal.exceptions.AnalyseSemantiqueException;
 import Compilation.yal.exceptions.NonDeclareException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class AppelDeFonction extends Expression {
 
@@ -122,14 +123,15 @@ public class AppelDeFonction extends Expression {
         appel.append(parametres.size() * 4);
         appel.append("\n\n");
 
-        int i =1;
+        Collections.reverse(parametres);
+        int i =0;
         for(Expression expression : parametres){
-            //System.out.println(expression);
             appel.append(expression.toMIPS());
             appel.append("sw $v0, ");
             appel.append(i * 4);
             appel.append("($sp)\n");
             i++;
+
         }
 
         appel.append("# Appel d'une fonction \n");
