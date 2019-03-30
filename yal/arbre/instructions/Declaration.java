@@ -17,12 +17,7 @@ public class Declaration extends Instruction{
 
         entree = new EntreeVariable(nom,noLigne);
 
-        //System.out.println("Declaration "+nom+" "+tds.getNumeroBloc());
-
         int dep = tds.getZoneVariable();
-
-       // System.out.println("Declaration var"+nom+" "+dep);
-
 
         symbole = new SymboleVariable(dep-4,tds.getNumeroBloc());
 
@@ -42,7 +37,7 @@ public class Declaration extends Instruction{
         String res = "" +
                 "# réservation de l'espace pour la variables\n" +
                 "    addi $sp, $sp,"+ symbole.deplacement()+"\n";
-        return res;
+        return "";
     }
 
     @Override

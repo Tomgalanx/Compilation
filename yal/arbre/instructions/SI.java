@@ -50,7 +50,7 @@ public class SI extends Instruction{
     @Override
     public String toMIPS() {
 
-        StringBuilder res = new StringBuilder(150);
+        StringBuilder res = new StringBuilder();
 
         // Get l'etiquette pour avoir un si unique
         int hash = FabriqueEtiquette.getEtiquette();

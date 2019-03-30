@@ -62,6 +62,7 @@ public class TDS {
         return courante.getZoneVariable();
     }
 
+
     public int getZoneParametre(){
         return courante.getZoneParametre();
     }
@@ -108,5 +109,9 @@ public class TDS {
 
     public int getNumeroBloc(){
         return courante.getNumero();
+    }
+
+    public int getNombreParametre(){
+        return courante.getNombreParametre();
     }
 }

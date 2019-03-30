@@ -1,7 +1,5 @@
 package Compilation.yal.arbre.instructions;
 
-import Compilation.yal.arbre.FabriqueEtiquette;
-import Compilation.yal.arbre.TDS;
 import Compilation.yal.arbre.expressions.Expression;
 import Compilation.yal.arbre.expressions.IDF;
 import Compilation.yal.exceptions.AnalyseSemantiqueException;

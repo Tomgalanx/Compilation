@@ -64,6 +64,22 @@ public class TDSLocale {
     }
 
 
+    public int getNombreParametre(){
+
+        int res = 0;
+
+        for (Symbole s : tds.values()) {
+            if (s.getType().equals(Symbole.PARAMETRE)) {
+                res++;
+            }
+
+
+        }
+
+        return res;
+    }
+
+
     // Méthode qui permet d'ajouter un Symbole dans notre collection
     public void ajouter(Entree e, Symbole s) throws DoubleDeclarationExcepion {
 
@@ -86,10 +102,10 @@ public class TDSLocale {
     // Retourne la taille de la pile pour les variables
     public int getZoneVariable() {
 
-        int res = 0;
+        int res = -4;
 
         for (Symbole s : tds.values()) {
-                if (s.getType().equals(Symbole.VARIABLE)) {
+                if (s.getType().equals(Symbole.VARIABLE) || s.getType().equals(Symbole.TABLEAU)) {
                     res = res - 4;
                 }
 
@@ -100,10 +116,11 @@ public class TDSLocale {
 
     }
 
+
     // Retourne la taille de la pile pour les parametres
     public int getZoneParametre() {
 
-        int res = 0;
+        int res = -4;
 
         for (Symbole s : tds.values()) {
             if (s.getType().equals(Symbole.PARAMETRE)) {
@@ -115,7 +132,7 @@ public class TDSLocale {
 
         }
 
-        System.out.println("le deplacement des parametres est : "+res );
+        //System.out.println("le deplacement des parametres est : "+res );
 
         return res;
 

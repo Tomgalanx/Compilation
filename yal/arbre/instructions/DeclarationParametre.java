@@ -1,6 +1,7 @@
 package Compilation.yal.arbre.instructions;
 
 
+import Compilation.yal.arbre.TDS;
 import Compilation.yal.arbre.Variables.EntreeVariable;
 import Compilation.yal.arbre.Variables.SymboleParametre;
 import Compilation.yal.arbre.Variables.SymboleVariable;
@@ -17,11 +18,11 @@ public class DeclarationParametre extends Instruction{
     public DeclarationParametre(int n,String nom) throws DoubleDeclarationExcepion {
         super(n);
 
-        EntreeVariable entree = new EntreeVariable(nom,noLigne);
+        entree = new EntreeVariable(nom,noLigne);
 
         int dep = tds.getZoneParametre()-4;
 
-        SymboleParametre symbole = new SymboleParametre(dep,tds.getNumeroBloc());
+        symbole = new SymboleParametre(dep,tds.getNumeroBloc());
 
         tds.ajouter(entree, symbole);
 

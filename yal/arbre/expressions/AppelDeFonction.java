@@ -1,5 +1,6 @@
 package Compilation.yal.arbre.expressions;
 
+import Compilation.yal.arbre.FabriqueEtiquette;
 import Compilation.yal.arbre.TDS;
 import Compilation.yal.arbre.Variables.EntreeFonction;
 import Compilation.yal.arbre.Variables.SymboleFonction;
@@ -75,11 +76,18 @@ public class AppelDeFonction extends Expression {
     @Override
     public String toMIPS() {
 
-
-        /*
         StringBuilder res = new StringBuilder();
 
-          int i =1;
+
+
+
+        res.append("# Préparation des parametres\n");
+        res.append("add $sp, $sp, -");
+        res.append(parametres.size() * 4);
+        res.append("\n\n");
+
+        Collections.reverse(parametres);
+        int i =0;
         for(Expression expression : parametres){
             res.append(expression.toMIPS());
             res.append("sw $v0, ");
@@ -88,16 +96,16 @@ public class AppelDeFonction extends Expression {
             i++;
         }
 
-        res.append("# Saut vers la fonction\n");
-        res.append("# On prépare la valeur de retour\n");
+        res.append("# Appel vers une fonction \n");
+        res.append("# Allocation de la place pour la valeur retour\n");
         res.append("add $sp, $sp, -4\n");
         res.append("\n");
 
-        res.append("# On fait un jump vers la fonction avec l'étiquette \n");
+        res.append("# On execute la fonction\n");
         res.append("jal " + etiquette + "\n");
         res.append("\n");
 
-        res.append("# Et on dépile dans v0\n");
+        res.append("# Dépiler dans $v0\n");
         res.append("add $sp, $sp, 4\n");
         res.append("lw $v0, 0($sp)\n");
         res.append("\n");
@@ -107,52 +115,6 @@ public class AppelDeFonction extends Expression {
         res.append(parametres.size() * 4);
         res.append("\n\n");
 
-
         return res.toString();
-
-        */
-
-
-
-
-        StringBuilder appel = new StringBuilder();
-
-
-        appel.append("# Allocation de la place pour les paramètres\n");
-        appel.append("add $sp, $sp, -");
-        appel.append(parametres.size() * 4);
-        appel.append("\n\n");
-
-        Collections.reverse(parametres);
-        int i =0;
-        for(Expression expression : parametres){
-            appel.append(expression.toMIPS());
-            appel.append("sw $v0, ");
-            appel.append(i * 4);
-            appel.append("($sp)\n");
-            i++;
-
-        }
-
-        appel.append("# Appel d'une fonction \n");
-        appel.append("# Allocation de la place pour la valeur retour\n");
-        appel.append("add $sp, $sp, -4\n");
-        appel.append("\n");
-
-        appel.append("# Saut vers l'étiquette de la fonction " + nom + "\n");
-        appel.append("jal " + etiquette + "\n");
-        appel.append("\n");
-
-        appel.append("# Dépiler dans $v0\n");
-        appel.append("add $sp, $sp, 4\n");
-        appel.append("lw $v0, 0($sp)\n");
-        appel.append("\n");
-
-        appel.append("# Dépiler les paramètres\n");
-        appel.append("add $sp, $sp, ");
-        appel.append(parametres.size() * 4);
-        appel.append("\n\n");
-
-        return appel.toString();
     }
 }

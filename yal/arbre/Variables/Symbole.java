@@ -9,7 +9,8 @@ public abstract class Symbole {
     protected int dep;
     protected int numeroBloc;
     public static String VARIABLE ="Variable";
-    protected static String FONCTION ="Fonction";
+    public static String FONCTION ="Fonction";
+    public static String TABLEAU ="tab";
 
     public Symbole(int deplacement,int numeroBloc){
         dep= deplacement;

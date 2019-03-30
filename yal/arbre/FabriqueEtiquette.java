@@ -5,6 +5,8 @@ public class FabriqueEtiquette {
 
     private static int etiquette=0;
 
+    public static int parametre=0;
+
 
     /*
         Return une etiquette et incremente le compteur

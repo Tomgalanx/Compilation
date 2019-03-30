@@ -9,7 +9,7 @@ import Compilation.yal.exceptions.NonDeclareException;
 public class IDF extends Expression{
 
     private String nom;
-    private int dep;
+    //private int dep;
 
     private int ligne;
     private int numeroBloc;
@@ -51,7 +51,7 @@ public class IDF extends Expression{
         res.append("# Récupère la base courante\n");
         res.append("move $t2, $s7\n");
 
-        res.append("# Récupère le numéro de région où est déclarée la variable\n");
+        res.append("#Numero de bloc\n");
         res.append("li $v1, ");
         res.append(numeroBloc);
         res.append("\n");
@@ -83,6 +83,7 @@ public class IDF extends Expression{
         res.append("($t2)");
         res.append("\n");
 
+
         return res.toString();
     }
 
@@ -96,8 +97,4 @@ public class IDF extends Expression{
         return nom;
     }
 
-
-    public int getNumeroBloc() {
-        return numeroBloc;
-    }
 }

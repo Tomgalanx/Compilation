@@ -5,12 +5,8 @@ import Compilation.yal.arbre.FabriqueEtiquette;
 import Compilation.yal.arbre.TDS;
 import Compilation.yal.arbre.Variables.EntreeFonction;
 import Compilation.yal.arbre.Variables.SymboleFonction;
-import Compilation.yal.arbre.expressions.Expression;
-import Compilation.yal.arbre.expressions.IDF;
 import Compilation.yal.exceptions.AnalyseSemantiqueException;
 import Compilation.yal.exceptions.NonDeclareException;
-
-import java.util.ArrayList;
 
 public class Fonction extends Instruction{
 
@@ -41,6 +37,7 @@ public class Fonction extends Instruction{
         this.liste = liste;
         this.parametre = n;
         numeroBloc = TDS.getInstance().getNumeroBloc();
+
         zoneVariable = TDS.getInstance().getZoneVariable();
 
 
@@ -48,6 +45,7 @@ public class Fonction extends Instruction{
         SymboleFonction symbole = new SymboleFonction(zoneVariable,etiquette,tds.getNumeroBloc());
 
         TDS.getInstance().ajouter(entree,symbole);
+
 
 
 
@@ -70,9 +68,13 @@ public class Fonction extends Instruction{
 
        // System.out.println("Numero de bloc fonc "+numeroBloc);
 
+        zoneVariable = TDS.getInstance().getZoneVariable();
+
 
         // On rentre dans le bloc pour faire l'analyse sémantique des instructions
         TDS.getInstance().visiteBloc();
+
+        //System.out.println("TDS = "+TDS.getInstance().getNombreParametre());
 
         liste.verifier();
 
@@ -112,7 +114,7 @@ public class Fonction extends Instruction{
         res.append("#base pour les variables de la fonctions\n");
         res.append("move $s7, $sp\n");
 
-        res.append("#Zone variables\n");
+        res.append("#Zone variables blabla\n");
         res.append("add $sp, $sp," + zoneVariable + "\n");
 
 

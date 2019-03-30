@@ -99,6 +99,11 @@ commentaireSlashSlash = [/][/].*
 "fonction"          { return symbol(CodesLexicaux.FONCTION);}
 "retourne"          { return symbol(CodesLexicaux.RETOURNE);}
 ","          { return symbol(CodesLexicaux.VIRGULE);}
+"["          { return symbol(CodesLexicaux.CROOUV);}
+"]"          { return symbol(CodesLexicaux.CROFER);}
+"."          { return symbol(CodesLexicaux.POINT);}
+"longueur"          { return symbol(CodesLexicaux.LONGEUR);}
+
 
 
 

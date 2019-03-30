@@ -10,9 +10,11 @@ public class CodesLexicaux {
   /* terminals */
   public static final int FONCTION = 30;
   public static final int TANTQUE = 17;
+  public static final int CROFER = 35;
   public static final int MULT = 10;
   public static final int REPETER = 18;
   public static final int SI = 28;
+  public static final int LONGEUR = 36;
   public static final int EGALE = 8;
   public static final int VIRGULE = 33;
   public static final int FIN = 4;
@@ -31,11 +33,13 @@ public class CodesLexicaux {
   public static final int MOINS = 12;
   public static final int DEBUT_FONCTION = 32;
   public static final int ET = 14;
+  public static final int IDF = 38;
   public static final int SINON = 29;
-  public static final int IDF = 34;
   public static final int ALORS = 26;
   public static final int PARFER = 25;
-  public static final int CSTENTIERE = 35;
+  public static final int POINT = 37;
+  public static final int CROOUV = 34;
+  public static final int CSTENTIERE = 39;
   public static final int SUPERIEUR = 23;
   public static final int PROGRAMME = 2;
   public static final int POINTVIRGULE = 5;
@@ -79,6 +83,10 @@ public class CodesLexicaux {
   "RETOURNE",
   "DEBUT_FONCTION",
   "VIRGULE",
+  "CROOUV",
+  "CROFER",
+  "LONGEUR",
+  "POINT",
   "IDF",
   "CSTENTIERE"
   };

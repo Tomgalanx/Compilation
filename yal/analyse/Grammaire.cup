@@ -74,7 +74,7 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE,ENTIER,EGALE,LIRE,MULT,DIV,MOINS,PLUS,ET,OU,DIFFERENT,TANTQUE,REPETER,FINTANTQUE,DOUBLEEGALE,NON,INFERIEUR,SUPERIEUR,PAROUV,PARFER,ALORS,FINSI,SI,SINON,FONCTION,RETOURNE,DEBUT_FONCTION,VIRGULE;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE,ENTIER,EGALE,LIRE,MULT,DIV,MOINS,PLUS,ET,OU,DIFFERENT,TANTQUE,REPETER,FINTANTQUE,DOUBLEEGALE,NON,INFERIEUR,SUPERIEUR,PAROUV,PARFER,ALORS,FINSI,SI,SINON,FONCTION,RETOURNE,DEBUT_FONCTION,VIRGULE,CROOUV,CROFER,LONGEUR,POINT;
 terminal String    IDF, CSTENTIERE;
    
 /* Non terminals used in the grammar section.  */
@@ -141,6 +141,17 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
         |       RETOURNE EXP:e POINTVIRGULE
                 {:
                 RESULT = new RetourneFonction(eleft,e); :}
+
+        |       ENTIER CROOUV EXP:e CROFER IDF:i POINTVIRGULE
+                {:
+                    RESULT = new DeclarationDeTableau(ileft,i,e);
+                :}
+
+        |       IDF:i CROOUV EXP:e CROFER EGALE EXP:r POINTVIRGULE
+              {:
+                // int n,String nom,Expression indice,Expression value
+                 RESULT = new AffectationDeTableau(ileft,i,e,r);
+              :}
          ;
     
 EXP    ::=     CSTENTIERE:c
@@ -193,6 +204,16 @@ EXP    ::=     CSTENTIERE:c
 
                 | IDF:i PAROUV LISTEPARA:par PARFER
                 {:RESULT = new AppelDeFonction(ileft,i,par); :}
+
+                | IDF:i CROOUV EXP:e CROFER
+                {:
+                RESULT = new IDF_TAB(ileft,i,e);
+                :}
+
+                | IDF:i POINT LONGEUR
+                {:
+                RESULT = new Longeur(ileft,i);
+                :}
                ;
 
 
@@ -226,6 +247,7 @@ DECL_FONC   ::= ENTETE IDF:i PAROUV PARAMETER:p PARFER DEBUT LINST:li FIN
                    {:
                     TDS.getInstance().sortirBloc();
                     RESULT = new Fonction(i,li,0);
+
                     :}
                  ;
 
@@ -241,24 +263,20 @@ ENTETE         ::= FONCTION
 
 
 PARAMETER    ::=    DECL_PAR POINTVIRGULE PARAMETER:nb
-                   {: RESULT = nb + 1; :}
+                   {: RESULT = nb + 1;
+                    :}
             |
                    DECL_PAR
                    {:
-                   RESULT = 1; :}
+                   RESULT = 1;:}
                    ;
 
 DECL_PAR    ::=    ENTIER:t IDF:idf
                    {:
 
-                   System.out.println("declaration grammaire de :"+idf);
-                   EntreeVariable entree = new EntreeVariable(idf,idfleft);
 
-                          int dep = TDS.getInstance().getZoneParametre()-4;
+                   new DeclarationParametre(idfleft, idf);
 
-                          SymboleParametre symbole = new SymboleParametre(dep,TDS.getInstance().getNumeroBloc());
-
-                          TDS.getInstance().ajouter(entree, symbole);
                    :}
                    ;
 
